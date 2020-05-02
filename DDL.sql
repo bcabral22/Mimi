@@ -4,4 +4,4 @@ create table Employee (
       lname varchar(30) not null,
       yearHired date not null,
       constraint employeePK Primary key (employeeID));
-   test   
+  
