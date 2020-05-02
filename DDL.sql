@@ -22,8 +22,17 @@ create table fullTime(
         --  making the emplopyee a primary key to identify this table
         constraint fullTimePK Primary key (employeeID),
         -- uniquely identifing this value from the employee table 
-		constraint employeeFK foreign key (employeeID) references Employee (employeeID));
-        
-        
+		constraint fullTimeFK foreign key (employeeID) references Employee (employeeID));
+ 
+-- this table gives info about part time employees 
+create table partTime(
+		-- foreign key from the empoyee id table
+		employeeID varchar(20) not null,
+        -- the set amount of money the person makes an hour 
+        hourlyRate int , 
+		--  making the emplopyee a primary key to identify this table
+        constraint partTimePK Primary key (employeeID),
+        -- uniquely identifing this value from the employee table 
+		constraint partTimeFK foreign key (employeeID) references Employee (employeeID));
 	
-    
+  
