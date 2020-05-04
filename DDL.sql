@@ -102,9 +102,9 @@ create table dishWasher(
         -- uniquely identifing this value from the employee table
 		constraint dishWasherFK foreign key (employeeID) references partTime (employeeID));
 
---------------------------------------end part time-------------------------------------------------------
+-- --------------------------------------end part time-------------------------------------------------------
 
---------------------------------------food stuff-------------------------------------------------------
+-- --------------------------------------food stuff-------------------------------------------------------
 -- this table gives info about Recipes
 create table Recipe(
 		-- foreign key from the headChef table
@@ -211,10 +211,10 @@ create table menuItem(
         --
         constraint menuItem_SpicinessFK foreign key (spiciness) references Spiciness (spiciness));
 
---------------------------------------end food stuff-------------------------------------------------------
+-- ------------------------------------end food stuff-------------------------------------------------------
 
 -- someone else look at this, some of it does not make sense to me. why is there an orderStatus and toGo have an attribute called ready?
---------------------------------------order stuff-------------------------------------------------------
+-- ------------------------------------order stuff-------------------------------------------------------
 -- this table gives info about the status of an order (IS THIS NEEDED PER THE PROJECT REQUIREMENTS?)
 create table orderStatus(
 		-- primary key
@@ -223,7 +223,7 @@ create table orderStatus(
         constraint orderStatusPK Primary key (orderStatus));
 
 -- this table gives info about Order
-create table Order(
+create table OrderTable(
 		-- primary key
 		orderNumber int not null,
 		-- status of the order
@@ -244,7 +244,7 @@ create table toGoOrder(
 		-- status of the order
 		phoneNumber varchar(20) not null,
         --
-        constraint toGoOrderFK foreign key (orderNumber) references Order (orderNumber),
+        constraint toGoOrderFK foreign key (orderNumber) references OrderTable (orderNumber),
 		--
         constraint toGoOrderPK Primary key (orderNumber));
 
@@ -277,7 +277,7 @@ create table orderDetails(
 		-- IS THIS NEEDED? -----------------------------------------------------------------------------------------------------------------------------------------------------
 		amount int not null,
         --
-        constraint orderDetails_OrderFK foreign key (orderNumber) references Order (orderNumber),
+        constraint orderDetails_OrderFK foreign key (orderNumber) references OrderTable (orderNumber),
         --
         constraint orderDetails_menuItemFK foreign key (menuType) references menuItem (menuType),
         --
@@ -288,4 +288,4 @@ create table orderDetails(
 
 
 
---------------------------------------end order stuff-------------------------------------------------------
+-- ------------------------------------end order stuff-------------------------------------------------------
