@@ -1,7 +1,7 @@
 -- general employee info table
 create table Employee (
    -- the employees id to uniquely identify them
-	  employeeID varchar(20) not null,
+	  employeeID int not null,
    -- employees first name   
       fname varchar(30) not null, 
    -- employees last name
@@ -15,7 +15,7 @@ create table Employee (
 -- this table gives info about fullTime
 create table fullTime(
 		-- foreign key from the employee table
-		employeeID varchar(20) not null,
+		employeeID int not null,
         -- the name of the healthcare provider
         healthcareInfo varchar(20),
         -- the set amount of money the person makes a week 
@@ -28,7 +28,7 @@ create table fullTime(
 -- this table gives info about Manager
 create table Manager(
 		-- foreign key from the fullTime table
-		employeeID varchar(20) not null,
+		employeeID int not null,
 		--  making the employee a primary key to identify this table
         constraint ManagerPK Primary key (employeeID),
         -- uniquely identifing this value from the employee table 
@@ -37,7 +37,7 @@ create table Manager(
 -- this table gives info about headChef
 create table headChef(
 		-- foreign key from the fullTime table
-		employeeID varchar(20) not null,
+		employeeID int not null,
 		--  making the employee a primary key to identify this table
         constraint headChefPK Primary key (employeeID),
         -- uniquely identifing this value from the employee table 
@@ -46,7 +46,7 @@ create table headChef(
 -- this table gives info about sousChef
 create table sousChef(
 		-- foreign key from the fullTime table
-		employeeID varchar(20) not null,
+		employeeID int not null,
 		--  making the employee a primary key to identify this table
         constraint sousChefPK Primary key (employeeID),
         -- uniquely identifing this value from the employee table 
@@ -55,7 +55,7 @@ create table sousChef(
 -- this table gives info about lineCook
 create table lineCook(
 		-- foreign key from the fullTime table
-		employeeID varchar(20) not null,
+		employeeID int not null,
 		--  making the employee a primary key to identify this table
         constraint lineCookPK Primary key (employeeID),
         -- uniquely identifing this value from the employee table 
@@ -67,7 +67,7 @@ create table lineCook(
 -- this table gives info about partTime
 create table partTime(
 		-- foreign key from the employee table
-		employeeID varchar(20) not null,
+		employeeID int not null,
         -- the set amount of money the person makes an hour 
         hourlyRate int , 
 		--  making the employee a primary key to identify this table
@@ -78,7 +78,7 @@ create table partTime(
 -- this table gives info about Maitred
 create table Maitred(
 		-- foreign key from the partTime table
-		employeeID varchar(20) not null,
+		employeeID int not null,
 		--  making the employee a primary key to identify this table
         constraint MaitredPK Primary key (employeeID),
         -- uniquely identifing this value from the employee table 
@@ -87,7 +87,7 @@ create table Maitred(
 -- this table gives info about waitStaff
 create table waitStaff(
 		-- foreign key from the partTime table
-		employeeID varchar(20) not null,
+		employeeID int not null,
 		--  making the employee a primary key to identify this table
         constraint waitStaffPK Primary key (employeeID),
         -- uniquely identifing this value from the employee table 
@@ -96,7 +96,7 @@ create table waitStaff(
 -- this table gives info about dishWasher
 create table dishWasher(
 		-- foreign key from the partTime table
-		employeeID varchar(20) not null,
+		employeeID int not null,
 		--  making the employee a primary key to identify this table
         constraint dishWasherPK Primary key (employeeID),
         -- uniquely identifing this value from the employee table 
@@ -108,7 +108,7 @@ create table dishWasher(
 -- this table gives info about Recipes
 create table Recipe(
 		-- foreign key from the headChef table
-		employeeID varchar(20) not null,
+		employeeID int not null,
         -- primary key
 		recipeName varchar(20) not null,
 		--  making the employee a primary key to identify this table
@@ -119,7 +119,7 @@ create table Recipe(
 -- this table gives info about foodItem
 create table foodItem(
 		-- foreign key from the headChef table
-		employeeID varchar(20) not null,
+		employeeID int not null,
         -- primary key
 		foodName varchar(20) not null,
 		--  making the employee a primary key to identify this table
@@ -176,5 +176,62 @@ create table dishType(
         -- uniquely identifing this value from the employee table 
 		constraint dishTypeFK foreign key (foodName) references meatDish (foodName));             
 
+-- this table gives info about Menu
+create table Menu(
+		-- foreign key from the meatDish table
+		menuType varchar(20) not null,
+		--  making the employee a primary key to identify this table
+        constraint MenuPK Primary key (menuType));
+
+-- this table gives info about Spiciness
+create table Spiciness(
+		-- primary key
+		spiciness varchar(20) not null,
+		--  making the employee a primary key to identify this table
+        constraint SpicinessPK Primary key (spiciness));
+
+-- this table gives info about menuItem
+create table menuItem(
+		-- foreign key from the Menu table
+		menuType varchar(20) not null,
+        -- foreign key from the foodItem table
+		foodName varchar(20) not null,
+        -- foreign key from the Spiciness table
+		spiciness varchar(20) not null,
+        --
+        size varchar(20) not null,
+        --
+        price varchar(20) not null,
+		--  making the employee a primary key to identify this table
+        constraint menuItemPK Primary key (menuType, foodName),
+        -- 
+        constraint menuItemMenuFK foreign key (menuType) references Menu (menuType),
+        --
+        constraint menuItemFoodItemFK foreign key (foodName) references foodItem (foodName),
+        --
+        constraint menuItemSpicinessFK foreign key (spiciness) references Spiciness (spiciness));
+
 --------------------------------------end food stuff-------------------------------------------------------
-        
+
+
+--------------------------------------order stuff-------------------------------------------------------
+-- this table gives info about the status of an order (IS THIS NEEDED PER THE PROJECT REQUIREMENTS?)
+create table orderStatus(
+		-- primary key
+		orderStatus varchar(20) not null,
+		--  making the employee a primary key to identify this table
+        constraint orderStatusPK Primary key (orderStatus));
+
+-- this table gives info about the order
+create table Order(
+		-- primary key
+		orderNumber int not null,
+		-- status of the order
+		orderStatus varchar(20) not null,        
+        --
+        constraint OrderFK foreign key (orderStatus) references orderStatus (orderStatus),        
+		--  making the employee a primary key to identify this table
+        constraint OrderPK Primary key (orderNumber));
+
+
+--------------------------------------end order stuff-------------------------------------------------------
