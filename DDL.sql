@@ -29,7 +29,7 @@ create table fullTime(
 create table Manager(
 		-- foreign key from the fullTime table
 		employeeID int not null,
-		--  making the employee a primary key to identify this table
+		--
         constraint ManagerPK Primary key (employeeID),
         -- uniquely identifing this value from the employee table
 		constraint ManagerFK foreign key (employeeID) references fullTime (employeeID));
@@ -38,7 +38,7 @@ create table Manager(
 create table headChef(
 		-- foreign key from the fullTime table
 		employeeID int not null,
-		--  making the employee a primary key to identify this table
+		--
         constraint headChefPK Primary key (employeeID),
         -- uniquely identifing this value from the employee table
 		constraint headChefFK foreign key (employeeID) references fullTime (employeeID));
@@ -47,7 +47,7 @@ create table headChef(
 create table sousChef(
 		-- foreign key from the fullTime table
 		employeeID int not null,
-		--  making the employee a primary key to identify this table
+		--
         constraint sousChefPK Primary key (employeeID),
         -- uniquely identifing this value from the employee table
 		constraint sousChefFK foreign key (employeeID) references fullTime (employeeID));
@@ -56,7 +56,7 @@ create table sousChef(
 create table lineCook(
 		-- foreign key from the fullTime table
 		employeeID int not null,
-		--  making the employee a primary key to identify this table
+		--
         constraint lineCookPK Primary key (employeeID),
         -- uniquely identifing this value from the employee table
 		constraint lineCookFK foreign key (employeeID) references fullTime (employeeID));
@@ -70,7 +70,7 @@ create table partTime(
 		employeeID int not null,
         -- the set amount of money the person makes an hour
         hourlyRate int ,
-		--  making the employee a primary key to identify this table
+		--
         constraint partTimePK Primary key (employeeID),
         -- uniquely identifing this value from the employee table
 		constraint partTimeFK foreign key (employeeID) references Employee (employeeID));
@@ -79,7 +79,7 @@ create table partTime(
 create table Maitred(
 		-- foreign key from the partTime table
 		employeeID int not null,
-		--  making the employee a primary key to identify this table
+		--
         constraint MaitredPK Primary key (employeeID),
         -- uniquely identifing this value from the employee table
 		constraint MaitredFK foreign key (employeeID) references partTime (employeeID));
@@ -88,7 +88,7 @@ create table Maitred(
 create table waitStaff(
 		-- foreign key from the partTime table
 		employeeID int not null,
-		--  making the employee a primary key to identify this table
+		--
         constraint waitStaffPK Primary key (employeeID),
         -- uniquely identifing this value from the employee table
 		constraint waitStaffFK foreign key (employeeID) references partTime (employeeID));
@@ -97,7 +97,7 @@ create table waitStaff(
 create table dishWasher(
 		-- foreign key from the partTime table
 		employeeID int not null,
-		--  making the employee a primary key to identify this table
+		--
         constraint dishWasherPK Primary key (employeeID),
         -- uniquely identifing this value from the employee table
 		constraint dishWasherFK foreign key (employeeID) references partTime (employeeID));
@@ -111,7 +111,7 @@ create table Recipe(
 		employeeID int not null,
         -- primary key
 		recipeName varchar(20) not null,
-		--  making the employee a primary key to identify this table
+		--
         constraint RecipePK Primary key (recipeName),
         -- uniquely identifing this value from the employee table
 		constraint RecipeFK foreign key (employeeID) references headChef (employeeID));
@@ -122,7 +122,7 @@ create table foodItem(
 		employeeID int not null,
         -- primary key
 		foodName varchar(20) not null,
-		--  making the employee a primary key to identify this table
+		--
         constraint foodItemPK Primary key (foodName),
         -- uniquely identifing this value from the employee table
 		constraint foodItemFK foreign key (employeeID) references Recipe (employeeID));
@@ -131,7 +131,7 @@ create table foodItem(
 create table Appetizer(
 		-- foreign key from the foodItem table
 		foodName varchar(20) not null,
-		--  making the employee a primary key to identify this table
+		--
         constraint AppetizerPK Primary key (foodName),
         -- uniquely identifing this value from the employee table
 		constraint AppetizerFK foreign key (foodName) references foodItem (foodName));
@@ -140,7 +140,7 @@ create table Appetizer(
 create table Soup(
 		-- foreign key from the foodItem table
 		foodName varchar(20) not null,
-		--  making the employee a primary key to identify this table
+		--
         constraint SoupPK Primary key (foodName),
         -- uniquely identifing this value from the employee table
 		constraint SoupFK foreign key (foodName) references foodItem (foodName));
@@ -149,7 +149,7 @@ create table Soup(
 create table meatDish(
 		-- foreign key from the foodItem table
 		foodName varchar(20) not null,
-		--  making the employee a primary key to identify this table
+		--
         constraint meatDishPK Primary key (foodName),
         -- uniquely identifing this value from the employee table
 		constraint meatDishFK foreign key (foodName) references foodItem (foodName));
@@ -160,7 +160,7 @@ create table meatType(
 		foodName varchar(20) not null,
         -- type of meat
 		meatType varchar(20) not null,
-		--  making the employee a primary key to identify this table
+		--
         constraint meatTypePK Primary key (foodName),
         -- uniquely identifing this value from the employee table
 		constraint meatTypeFK foreign key (foodName) references meatDish (foodName));
@@ -171,7 +171,7 @@ create table dishType(
 		foodName varchar(20) not null,
         -- type of dish
 		dishType varchar(20) not null,
-		--  making the employee a primary key to identify this table
+		--
         constraint dishTypePK Primary key (foodName),
         -- uniquely identifing this value from the employee table
 		constraint dishTypeFK foreign key (foodName) references meatDish (foodName));
@@ -180,14 +180,14 @@ create table dishType(
 create table Menu(
 		-- foreign key from the meatDish table
 		menuType varchar(20) not null,
-		--  making the employee a primary key to identify this table
+		--
         constraint MenuPK Primary key (menuType));
 
 -- this table gives info about Spiciness
 create table Spiciness(
 		-- primary key
 		spiciness varchar(20) not null,
-		--  making the employee a primary key to identify this table
+		--
         constraint SpicinessPK Primary key (spiciness));
 
 -- this table gives info about menuItem
@@ -202,14 +202,14 @@ create table menuItem(
         size varchar(20) not null,
         --
         price varchar(20) not null,
-		--  making the employee a primary key to identify this table
+		--
         constraint menuItemPK Primary key (menuType, foodName),
         --
-        constraint menuItemMenuFK foreign key (menuType) references Menu (menuType),
+        constraint menuItem_MenuFK foreign key (menuType) references Menu (menuType),
         --
-        constraint menuItemFoodItemFK foreign key (foodName) references foodItem (foodName),
+        constraint menuItem_FoodItemFK foreign key (foodName) references foodItem (foodName),
         --
-        constraint menuItemSpicinessFK foreign key (spiciness) references Spiciness (spiciness));
+        constraint menuItem_SpicinessFK foreign key (spiciness) references Spiciness (spiciness));
 
 --------------------------------------end food stuff-------------------------------------------------------
 
@@ -219,10 +219,10 @@ create table menuItem(
 create table orderStatus(
 		-- primary key
 		orderStatus varchar(20) not null,
-		--  making the employee a primary key to identify this table
+		--
         constraint orderStatusPK Primary key (orderStatus));
 
--- this table gives info about the order
+-- this table gives info about Order
 create table Order(
 		-- primary key
 		orderNumber int not null,
@@ -230,10 +230,10 @@ create table Order(
 		orderStatus varchar(20) not null,
         --
         constraint OrderFK foreign key (orderStatus) references orderStatus (orderStatus),
-		--  making the employee a primary key to identify this table
+		--
         constraint OrderPK Primary key (orderNumber));
 
--- this table gives info about the toGo
+-- this table gives info about the toGoOrder
 create table toGoOrder(
 		-- primary key
 		orderNumber int not null,
@@ -245,26 +245,45 @@ create table toGoOrder(
 		phoneNumber varchar(20) not null,
         --
         constraint toGoOrderFK foreign key (orderNumber) references Order (orderNumber),
-		--  making the employee a primary key to identify this table
+		--
         constraint toGoOrderPK Primary key (orderNumber));
 
--- this table gives info about the Web
+-- this table gives info about the webOrder
 create table webOrder(
 		-- primary key
 		orderNumber int not null,
         --
         constraint webOrderFK foreign key (orderNumber) references toGoOrder (orderNumber),
-		--  making the employee a primary key to identify this table
+		--
         constraint webOrderPK Primary key (orderNumber));
 
--- this table gives info about the Phone
+-- this table gives info about the phoneOrder
 create table phoneOrder(
 		-- primary key
 		orderNumber int not null,
         --
         constraint phoneOrderFK foreign key (orderNumber) references toGoOrder (orderNumber),
-		--  making the employee a primary key to identify this table
+		--
         constraint phoneOrderPK Primary key (orderNumber));
+
+-- this table gives info about the orderDetails
+create table orderDetails(
+		--
+		orderNumber int not null,
+		--
+        menuType varchar(20) not null,
+		--
+		foodName varchar(20) not null,
+		-- IS THIS NEEDED? -----------------------------------------------------------------------------------------------------------------------------------------------------
+		amount int not null,
+        --
+        constraint orderDetails_OrderFK foreign key (orderNumber) references Order (orderNumber),
+        --
+        constraint orderDetails_menuItemFK foreign key (menuType) references menuItem (menuType),
+        --
+        constraint orderDetails_menuItemFK2 foreign key (foodName) references menuItem (foodName),
+		--
+        constraint phoneOrderPK Primary key (orderNumber, menuType, foodName));
 
 
 
