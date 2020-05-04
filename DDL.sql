@@ -127,5 +127,54 @@ create table foodItem(
         -- uniquely identifing this value from the employee table 
 		constraint foodItemFK foreign key (employeeID) references Recipe (employeeID));
 
+-- this table gives info about Appetizer
+create table Appetizer(
+		-- foreign key from the foodItem table
+		foodName varchar(20) not null,
+		--  making the employee a primary key to identify this table
+        constraint AppetizerPK Primary key (foodName),
+        -- uniquely identifing this value from the employee table 
+		constraint AppetizerFK foreign key (foodName) references foodItem (foodName));
+
+-- this table gives info about Soup
+create table Soup(
+		-- foreign key from the foodItem table
+		foodName varchar(20) not null,
+		--  making the employee a primary key to identify this table
+        constraint SoupPK Primary key (foodName),
+        -- uniquely identifing this value from the employee table 
+		constraint SoupFK foreign key (foodName) references foodItem (foodName));
+
+-- this table gives info about meatDish
+create table meatDish(
+		-- foreign key from the foodItem table
+		foodName varchar(20) not null,
+		--  making the employee a primary key to identify this table
+        constraint meatDishPK Primary key (foodName),
+        -- uniquely identifing this value from the employee table 
+		constraint meatDishFK foreign key (foodName) references foodItem (foodName));
+
+-- this table gives info about meatType
+create table meatType(
+		-- foreign key from the meatDish table
+		foodName varchar(20) not null,
+        -- type of meat
+		meatType varchar(20) not null,        
+		--  making the employee a primary key to identify this table
+        constraint meatTypePK Primary key (foodName),
+        -- uniquely identifing this value from the employee table 
+		constraint meatTypeFK foreign key (foodName) references meatDish (foodName));        
+
+-- this table gives info about dishType
+create table dishType(
+		-- foreign key from the meatDish table
+		foodName varchar(20) not null,
+        -- type of dish
+		dishType varchar(20) not null,
+		--  making the employee a primary key to identify this table
+        constraint dishTypePK Primary key (foodName),
+        -- uniquely identifing this value from the employee table 
+		constraint dishTypeFK foreign key (foodName) references meatDish (foodName));             
+
 --------------------------------------end food stuff-------------------------------------------------------
         
