@@ -11,7 +11,7 @@ create table Employee (
    -- making employee id the primary key becasue it is the most unique variable
       constraint employeePK Primary key (employeeID));
 
------------------------------------full time-------------------------------------------------
+-- ---------------------------------full time-------------------------------------------------
 -- this table gives info about fullTime
 create table fullTime(
 		-- foreign key from the employee table
@@ -61,9 +61,9 @@ create table lineCook(
         -- uniquely identifing this value from the employee table
 		constraint lineCookFK foreign key (employeeID) references fullTime (employeeID));
 
---------------------------------------end full time-------------------------------------------------------
+-- ------------------------------------end full time-------------------------------------------------------
 
----------------------------------part time------------------------------------------------
+-- -------------------------------part time------------------------------------------------
 -- this table gives info about partTime
 create table partTime(
 		-- foreign key from the employee table
