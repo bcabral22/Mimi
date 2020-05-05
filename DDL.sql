@@ -278,12 +278,21 @@ create table Seat(
 		-- primary key
 		seatNumber INT not null,
 		constraint SeatFK foreign key (tableNumber) references storeTable (tableNumber),
-
 		--
         constraint storeTablePK Primary key (tableNumber, seatNumber));
 
 -- ------------------------------------end Table stuff-------------------------------------------------------
 -- ------------------------------------Customer stuff-------------------------------------------------------
+
+-- this table gives info about the Account
+create table Account(
+		--
+		accountID INT not null,
+		--
+		amount FLOAT not null,
+		--
+        constraint AccountPK Primary key (accountID));
+
 -- this table gives info about the Customer
 create table Customer(
 		-- Customer first name
@@ -292,6 +301,10 @@ create table Customer(
 		lname varchar(30) not null,
 		-- Customer address
 		postalAddress varchar(30) not null,
+		--
+		accountID INT not null,
+		--
+		constraint CustomerFK foreign key (accountID) references Account (accountID),
 		--
         constraint CustomerPK Primary key (fname, lname, postalAddress));
 
@@ -540,5 +553,98 @@ create table shiftType(
 		--
         constraint shiftTypePK Primary key (type));
 
+create table Station(
+		--
+		name varchar(30) not null,
+		--
+        constraint StationPK Primary key (name));
+
+create table Shift(
+		--
+		type varchar(30) not null,
+		--
+		managerID INT not null,
+		--
+		maitredID INT not null,
+		--
+		headChefID INT not null,
+		--
+		date DATE not null,
+		--
+		constraint Shift_ManagerFK foreign key (managerID) references Manager (employeeID),
+		--
+		constraint Shift_MaitredFK foreign key (maitredID) references Maitred (employeeID),
+		--
+		constraint Shift_shiftTypeFK foreign key (type) references shiftType (type),
+		--
+		constraint Shift_headChefFK foreign key (headChefID) references headChef (employeeID),
+		--
+        constraint StationPK Primary key (type, date, managerID, headChefID));
+
+create table Schedule(
+		--
+		type varchar(30) not null,
+		--
+		managerID INT not null,
+		--
+		headChefID INT not null,
+		--
+		date DATE not null,
+		--
+		constraint Schedule_ManagerFK foreign key (managerID) references Employee (employeeID),
+		--
+		constraint Schedule_headChefFK foreign key (headChefID) references Employee (employeeID),
+		--
+		constraint Schedule_ShiftFK foreign key (type, date, managerID, headChefID) references Shift (type, date, managerID, headChefID),
+		--
+        constraint SchedulePK Primary key (type, managerID, headChefID, date));
+
+create table StationAssignment(
+		--
+		stationName varchar(30) not null,
+		--
+		type varchar(30) not null,
+		--
+		managerID INT not null,
+		--
+		headChefID INT not null,
+		--
+		lineCookID INT not null,
+		--
+		date DATE not null,
+		--
+		constraint StationAssignment_StationFK foreign key (stationName) references Station (name),
+		--
+		constraint StationAssignment_lineCookFK foreign key (lineCookID) references lineCook (employeeID),
+		--
+		constraint StationAssignment_ScheduleFK foreign key (type, date, managerID, headChefID) references Shift (type, date, managerID, headChefID),
+		--
+        constraint StationAssignmentPK Primary key (type, managerID, headChefID, date, lineCookID, stationName));
+
+
+
+create table waitTableAssignment(
+		--
+		type varchar(30) not null,
+		--
+		managerID INT not null,
+		--
+		headChefID INT not null,
+		--
+		date DATE not null,
+		--
+		tableNumber INT not null,
+		--
+		waitStaffID INT not null,
+		--
+		constraint waitTableAssignment_storeTableFK foreign key (tableNumber) references storeTable (tableNumber),
+		--
+		constraint waitTableAssignment_waitStaffFK foreign key (waitStaffID) references waitStaff (employeeID),
+		--
+		constraint waitTableAssignment_ShiftFK foreign key (type, date, managerID, headChefID) references Schedule (type, date, managerID, headChefID),
+		--
+		constraint waitTableAssignment_ScheduleFK foreign key (type, date, managerID, headChefID) references Shift (type, date, managerID, headChefID),
+		--
+        constraint waitTableAssignmentPK Primary key (type, managerID, headChefID, date, tableNumber, waitStaffID));
 
 -- ------------------------------------end shift stuff-------------------------------------------------------
