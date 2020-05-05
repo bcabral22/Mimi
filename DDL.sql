@@ -286,6 +286,43 @@ create table orderDetails(
         constraint phoneOrderPK Primary key (orderNumber, menuType, foodName));
 
 
+-- this table gives info about the phoneOrder
+create table eatInOrder(
+		-- primary key
+		orderNumber int not null,
+		--
+		tableNumber int not null,
+		--
+		seatNumber int not null,
+		--
+		timeArrived TIME,
+        --
+        constraint eatInOrderFK foreign key (tableNumber, seatNumber) references Seat (tableNumber, seatNumber),
+		--
+        constraint eatInOrderPK Primary key (orderNumber));
+
+--------------------------------------end order stuff-------------------------------------------------------
 
 
--- ------------------------------------end order stuff-------------------------------------------------------
+--------------------------------------table stuff-------------------------------------------------------
+-- this table gives info about the Table
+-- might need to rename this
+create table Table(
+		-- primary key
+		tableNumber int not null,
+		--
+        constraint TablePK Primary key (tableNumber));
+
+
+-- this table gives info about the Seat
+create table Seat(
+		-- primary key
+		tableNumber int not null,
+		-- primary key
+		seatNumber int not null,
+        --
+		constraint SeatFK foreign key (tableNumber) references Table (tableNumber),
+		--
+        constraint TablePK Primary key (tableNumber, seatNumber));
+
+--------------------------------------end table stuff-------------------------------------------------------
