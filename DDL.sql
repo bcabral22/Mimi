@@ -1,7 +1,7 @@
 -- general employee info table
 create table Employee (
    -- the employees id to uniquely identify them
-	  employeeID int not null,
+	  employeeID INT not null,
    -- employees first name
       fname varchar(30) not null,
    -- employees last name
@@ -12,23 +12,37 @@ create table Employee (
       constraint employeePK Primary key (employeeID));
 
 -- ---------------------------------full time-------------------------------------------------
+-- this table gives info about healthCare
+create table healthCare(
+        -- the name of the healthcare provider
+        name varchar(20),
+        -- the type of the healthcare
+        type varchar(20),
+        --
+        constraint healthCarePK Primary key (name, type));
+
 -- this table gives info about fullTime
 create table fullTime(
 		-- foreign key from the employee table
-		employeeID int not null,
+		employeeID INT not null,
         -- the name of the healthcare provider
-        healthcareInfo varchar(20),
+        healthcareName varchar(20),
+        --
+        healthcareType varchar(20),
         -- the set amount of money the person makes a week
-        weeklyRate int ,
+        weeklyRate INT,
         --  making the employee a primary key to identify this table
         constraint fullTimePK Primary key (employeeID),
+        --
+		constraint fullTime_healthCareFK foreign key (healthcareName, healthcareType) references healthCare (name, type),
         -- uniquely identifing this value from the employee table
-		constraint fullTimeFK foreign key (employeeID) references Employee (employeeID));
+		constraint fullTime_EmployeeFK foreign key (employeeID) references Employee (employeeID));
+
 
 -- this table gives info about Manager
 create table Manager(
 		-- foreign key from the fullTime table
-		employeeID int not null,
+		employeeID INT not null,
 		--
         constraint ManagerPK Primary key (employeeID),
         -- uniquely identifing this value from the employee table
@@ -37,7 +51,7 @@ create table Manager(
 -- this table gives info about headChef
 create table headChef(
 		-- foreign key from the fullTime table
-		employeeID int not null,
+		employeeID INT not null,
 		--
         constraint headChefPK Primary key (employeeID),
         -- uniquely identifing this value from the employee table
@@ -46,7 +60,7 @@ create table headChef(
 -- this table gives info about sousChef
 create table sousChef(
 		-- foreign key from the fullTime table
-		employeeID int not null,
+		employeeID INT not null,
 		--
         constraint sousChefPK Primary key (employeeID),
         -- uniquely identifing this value from the employee table
@@ -55,7 +69,7 @@ create table sousChef(
 -- this table gives info about lineCook
 create table lineCook(
 		-- foreign key from the fullTime table
-		employeeID int not null,
+		employeeID INT not null,
 		--
         constraint lineCookPK Primary key (employeeID),
         -- uniquely identifing this value from the employee table
@@ -67,9 +81,9 @@ create table lineCook(
 -- this table gives info about partTime
 create table partTime(
 		-- foreign key from the employee table
-		employeeID int not null,
+		employeeID INT not null,
         -- the set amount of money the person makes an hour
-        hourlyRate int ,
+        hourlyRate INT ,
 		--
         constraint partTimePK Primary key (employeeID),
         -- uniquely identifing this value from the employee table
@@ -78,7 +92,7 @@ create table partTime(
 -- this table gives info about Maitred
 create table Maitred(
 		-- foreign key from the partTime table
-		employeeID int not null,
+		employeeID INT not null,
 		--
         constraint MaitredPK Primary key (employeeID),
         -- uniquely identifing this value from the employee table
@@ -87,7 +101,7 @@ create table Maitred(
 -- this table gives info about waitStaff
 create table waitStaff(
 		-- foreign key from the partTime table
-		employeeID int not null,
+		employeeID INT not null,
 		--
         constraint waitStaffPK Primary key (employeeID),
         -- uniquely identifing this value from the employee table
@@ -96,7 +110,7 @@ create table waitStaff(
 -- this table gives info about dishWasher
 create table dishWasher(
 		-- foreign key from the partTime table
-		employeeID int not null,
+		employeeID INT not null,
 		--
         constraint dishWasherPK Primary key (employeeID),
         -- uniquely identifing this value from the employee table
@@ -108,7 +122,7 @@ create table dishWasher(
 -- this table gives info about Recipes
 create table Recipe(
 		-- foreign key from the headChef table
-		employeeID int not null,
+		employeeID INT not null,
         -- primary key
 		recipeName varchar(20) not null,
 		--
@@ -118,14 +132,12 @@ create table Recipe(
 
 -- this table gives info about foodItem
 create table foodItem(
-		-- foreign key from the headChef table
-		employeeID int not null,
         -- primary key
 		foodName varchar(20) not null,
 		--
         constraint foodItemPK Primary key (foodName),
         -- uniquely identifing this value from the employee table
-		constraint foodItemFK foreign key (employeeID) references Recipe (employeeID));
+		constraint foodItemFK foreign key (foodName) references Recipe (recipeName));
 
 -- this table gives info about Appetizer
 create table Appetizer(
@@ -213,8 +225,117 @@ create table menuItem(
 
 -- ------------------------------------end food stuff-------------------------------------------------------
 
+-- ------------------------------------expertise and mentorship stuff-------------------------------------------------------
+
+-- this table gives info about Expertise
+create table Expertise(
+		--
+		employeeID INT not null,
+		--
+		foodName varchar(20) not null,
+		--
+        constraint ExpertisePK Primary key (employeeID, foodName),
+		--
+		constraint Expertise_sousChefFK foreign key (employeeID) references sousChef (employeeID),
+        --
+		constraint Expertise_foodItemFK foreign key (foodName) references foodItem (foodName));
+
+-- this table gives info about Mentorship
+create table Mentorship(
+		--
+		sousID INT not null,
+		--
+		mentorID INT not null,
+		--
+		foodName varchar(20) not null,
+		--
+		startDate TIME,
+		--
+		endDate TIME,
+		--
+        constraint MentorshipPK Primary key (sousID, mentorID, foodName),
+		--
+		constraint Mentorship_sousChefFK foreign key (sousID) references sousChef (employeeID),
+        --
+		constraint Mentorship_ExpertiseFK foreign key (foodName, mentorID) references Expertise (foodName, employeeID));
+-- ------------------------------------end expertise and mentorship stuff-------------------------------------------------------
+
+
+-- ------------------------------------Table stuff-------------------------------------------------------
+-- this table gives info about the Table
+-- might need to rename this
+create table storeTable(
+		-- primary key
+		tableNumber INT not null,
+		--
+        constraint storeTablePK Primary key (tableNumber));
+
+
+-- this table gives info about the Seat
+create table Seat(
+		-- primary key
+		tableNumber INT not null,
+		-- primary key
+		seatNumber INT not null,
+		constraint SeatFK foreign key (tableNumber) references storeTable (tableNumber),
+
+		--
+        constraint storeTablePK Primary key (tableNumber, seatNumber));
+
+-- ------------------------------------end Table stuff-------------------------------------------------------
+-- ------------------------------------Customer stuff-------------------------------------------------------
+-- this table gives info about the Customer
+create table Customer(
+		-- Customer first name
+		fname varchar(30) not null,
+		-- Customer last name
+		lname varchar(30) not null,
+		-- Customer address
+		postalAddress varchar(30) not null,
+		--
+        constraint CustomerPK Primary key (fname, lname, postalAddress));
+
+-- this table gives info about the privateCustomer
+create table privateCustomer(
+		-- Customer first name
+		fname varchar(30) not null,
+		-- Customer last name
+		lname varchar(30) not null,
+		-- Customer address
+		postalAddress varchar(30) not null,
+		-- Customer email address
+		email varchar(30) not null,
+		--
+		constraint privateCustomerFK foreign key (fname, lname, postalAddress) references Customer (fname, lname, postalAddress),
+		--
+        constraint privateCustomerPK Primary key (fname, lname, postalAddress));
+
+-- this table gives info about the corpCustomer
+create table corpCustomer(
+		-- Customer first name
+		fname varchar(30) not null,
+		-- Customer last name
+		lname varchar(30) not null,
+		-- Customer address
+		postalAddress varchar(30) not null,
+		-- Org name
+		orgName varchar(30) not null,
+		--
+		companyName varchar(30) not null,
+		--
+		contactFName varchar(30) not null,
+		--
+		contactLName varchar(30) not null,
+		--
+		phoneNumber varchar(30) not null,
+		--
+		constraint corpCustomerFK foreign key (fname, lname, postalAddress) references Customer (fname, lname, postalAddress),
+		--
+        constraint corpCustomerPK Primary key (fname, lname, postalAddress));
+-- ------------------------------------end Customer stuff-------------------------------------------------------
+
 -- someone else look at this, some of it does not make sense to me. why is there an orderStatus and toGo have an attribute called ready?
--- ------------------------------------order stuff-------------------------------------------------------
+-- ------------------------------------Order stuff-------------------------------------------------------
 -- this table gives info about the status of an order (IS THIS NEEDED PER THE PROJECT REQUIREMENTS?)
 create table orderStatus(
 		-- primary key
@@ -225,7 +346,7 @@ create table orderStatus(
 -- this table gives info about Order
 create table OrderTable(
 		-- primary key
-		orderNumber int not null,
+		orderNumber INT not null,
 		-- status of the order
 		orderStatus varchar(20) not null,
         --
@@ -236,7 +357,7 @@ create table OrderTable(
 -- this table gives info about the toGoOrder
 create table toGoOrder(
 		-- primary key
-		orderNumber int not null,
+		orderNumber INT not null,
 		-- status of the order
 		orderStatus varchar(20) not null,
 		-- ready
@@ -251,7 +372,7 @@ create table toGoOrder(
 -- this table gives info about the webOrder
 create table webOrder(
 		-- primary key
-		orderNumber int not null,
+		orderNumber INT not null,
         --
         constraint webOrderFK foreign key (orderNumber) references toGoOrder (orderNumber),
 		--
@@ -260,7 +381,7 @@ create table webOrder(
 -- this table gives info about the phoneOrder
 create table phoneOrder(
 		-- primary key
-		orderNumber int not null,
+		orderNumber INT not null,
         --
         constraint phoneOrderFK foreign key (orderNumber) references toGoOrder (orderNumber),
 		--
@@ -269,13 +390,13 @@ create table phoneOrder(
 -- this table gives info about the orderDetails
 create table orderDetails(
 		--
-		orderNumber int not null,
+		orderNumber INT not null,
 		--
         menuType varchar(20) not null,
 		--
 		foodName varchar(20) not null,
 		-- IS THIS NEEDED? -----------------------------------------------------------------------------------------------------------------------------------------------------
-		amount int not null,
+		amount INT not null,
         --
         constraint orderDetails_OrderFK foreign key (orderNumber) references OrderTable (orderNumber),
         --
@@ -286,14 +407,14 @@ create table orderDetails(
         constraint phoneOrderPK Primary key (orderNumber, menuType, foodName));
 
 
--- this table gives info about the phoneOrder
+-- this table gives info about the eatInOrder
 create table eatInOrder(
 		-- primary key
-		orderNumber int not null,
+		orderNumber INT not null,
 		--
-		tableNumber int not null,
+		tableNumber INT not null,
 		--
-		seatNumber int not null,
+		seatNumber INT not null,
 		--
 		timeArrived TIME,
         --
@@ -301,28 +422,123 @@ create table eatInOrder(
 		--
         constraint eatInOrderPK Primary key (orderNumber));
 
---------------------------------------end order stuff-------------------------------------------------------
+-- ------------------------------------end Order stuff-------------------------------------------------------
 
 
---------------------------------------table stuff-------------------------------------------------------
--- this table gives info about the Table
--- might need to rename this
-create table Table(
+-- ------------------------------------Bill stuff-------------------------------------------------------
+-- this table gives info about the Bill
+create table Bill(
 		-- primary key
-		tableNumber int not null,
+		billID INT not null,
 		--
-        constraint TablePK Primary key (tableNumber));
-
-
--- this table gives info about the Seat
-create table Seat(
-		-- primary key
-		tableNumber int not null,
-		-- primary key
-		seatNumber int not null,
-        --
-		constraint SeatFK foreign key (tableNumber) references Table (tableNumber),
+		amountDue FLOAT not null,
 		--
-        constraint TablePK Primary key (tableNumber, seatNumber));
+        constraint BillPK Primary key (billID));
 
---------------------------------------end table stuff-------------------------------------------------------
+-- this table gives info about the cashBill
+create table cashBill(
+		-- primary key
+		billID INT not null,
+		--
+		constraint cashBillFK foreign key (billID) references Bill (billID),
+		--
+        constraint cashBillPK Primary key (billID));
+
+-- this table gives info about the mimingsBill
+create table mimingsBill(
+		-- primary key
+		billID INT not null,
+		--
+		mimingsAmount INT not null,
+		--
+		constraint mimingsBillFK foreign key (billID) references Bill (billID),
+		--
+        constraint mimingsBillPK Primary key (billID));
+
+-- this table gives info about the creditBill
+create table creditBill(
+		-- primary key
+		billID INT not null,
+		--
+		constraint creditBillFK foreign key (billID) references Bill (billID),
+		--
+        constraint creditBillPK Primary key (billID));
+
+-- this table gives info about the Anon
+create table Anon(
+		-- primary key
+		billID INT not null,
+		--
+		constraint Anon_BillFK foreign key (billID) references Bill (billID),
+		--
+		constraint Anon_cashBillFK foreign key (billID) references cashBill (billID),
+		--
+        constraint AnonPK Primary key (billID));
+
+-- this table gives info about the Known
+create table Known(
+		-- primary key
+		billID INT not null,
+		-- Customer first name
+		fname varchar(30) not null,
+		-- Customer last name
+		lname varchar(30) not null,
+		-- Customer address
+		postalAddress varchar(30) not null,
+		--
+		constraint Known_BillFK foreign key (billID) references Bill (billID),
+		--
+		constraint Known_CustomerFK foreign key (fname, lname, postalAddress) references Customer (fname, lname, postalAddress),
+		--
+        constraint KnownPK Primary key (billID));
+
+-- ------------------------------------end Bill stuff-------------------------------------------------------
+
+
+-- ------------------------------------Party stuff-------------------------------------------------------
+-- this table gives info about the Party SHOULD BILLID BE A PART OF THE PRIMARY KEY?------------------------------------------------------------------------------------------------
+create table Party(
+		-- primary key
+		billID INT not null,
+		-- Customer first name
+		fname varchar(30) not null,
+		-- Customer last name
+		lname varchar(30) not null,
+		-- Customer address
+		postalAddress varchar(30) not null,
+		--
+		constraint Party_CustomerFK foreign key (fname, lname, postalAddress) references Customer (fname, lname, postalAddress),
+		--
+		constraint Party_BillFK foreign key (billID) references Bill (billID),
+		--
+        constraint PartyPK Primary key (fname, lname, postalAddress));
+
+create table partyAssignment(
+		-- primary key
+		tableNumber INT not null,
+		-- Customer first name
+		fname varchar(30) not null,
+		-- Customer last name
+		lname varchar(30) not null,
+		-- Customer address
+		postalAddress varchar(30) not null,
+		--
+		constraint Party_PartyFK foreign key (fname, lname, postalAddress) references Party (fname, lname, postalAddress),
+		--
+		constraint Party_storeTableFK foreign key (tableNumber) references storeTable (tableNumber),
+		--
+        constraint PartyPK Primary key (fname, lname, postalAddress, tableNumber));
+-- ------------------------------------end Party stuff-------------------------------------------------------
+
+
+
+
+-- ------------------------------------shift stuff-------------------------------------------------------
+create table shiftType(
+		--
+		type varchar(30) not null,
+		--
+        constraint shiftTypePK Primary key (type));
+
+
+-- ------------------------------------end shift stuff-------------------------------------------------------
