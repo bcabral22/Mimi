@@ -22,8 +22,12 @@ ORDER BY account.amount DESC;
 SELECT known.fname, known.lname, SUM(mimingsbill.mimingsAmount) FROM known 
 INNER JOIN mimingsbill ON known.billID = mimingsbill.billID
 GROUP BY known.fname, known.lname
-ORDER BY SUM(mimingsbill.mimingsAmount) DESC
+ORDER BY SUM(mimingsbill.mimingsAmount) DESC;
 
+-- 10
+SELECT party.fname, party.lname, MONTH(date), Year(date), count(*) "Visits" from party
+group by party.fname, party.lname, MONTH(date)
+ORDER BY COUNT(*) DESC;
 
 -- 11
 select OD.foodname, sum(MI.price)
