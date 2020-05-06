@@ -174,9 +174,6 @@ Insert Into storeTable(tableNumber)
               (3),
               (4),
               (5);
-		--
-        constraint storeTablePK Primary key (tableNumber));
-
 
 -- this table gives info about the Seat
 create table Seat(
