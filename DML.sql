@@ -99,15 +99,8 @@ Insert Into meatDish(foodName)
 	value	('Krypoto Beef');
 
 -- this table gives info about meatType
-create table meatType(
-		-- foreign key from the meatDish table
-		foodName varchar(20) not null,
-        -- type of meat
-		meatType varchar(20) not null,
-		--
-        constraint meatTypePK Primary key (foodName),
-        -- uniquely identifing this value from the employee table
-		constraint meatTypeFK foreign key (foodName) references meatDish (foodName));
+Insert Into meatType(foodName,meatType)
+		value	('Krypoto Beef','Beef');
 
 -- this table gives info about dishType
 create table dishType(
