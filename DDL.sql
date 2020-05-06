@@ -262,11 +262,23 @@ create table Mentorship(
 
 
 -- ------------------------------------Table stuff-------------------------------------------------------
+
+
+create table tableStatus(
+		-- primary key
+		status varchar(15) not null,
+		--
+        constraint tableStatusPK Primary key (status));
+
+
 -- this table gives info about the Table
--- might need to rename this
 create table storeTable(
 		-- primary key
 		tableNumber INT not null,
+		--
+		status varchar(15) not null,
+		--
+		constraint storeTableFK foreign key (status) references tableStatus (status),
 		--
         constraint storeTablePK Primary key (tableNumber));
 
@@ -284,12 +296,22 @@ create table Seat(
 -- ------------------------------------end Table stuff-------------------------------------------------------
 -- ------------------------------------Customer stuff-------------------------------------------------------
 
+create table accountStatus(
+		--
+		status varchar(14) not null,
+		--
+        constraint accountStatusPK Primary key (status));
+
 -- this table gives info about the Account
 create table Account(
 		--
 		accountID INT not null,
 		--
 		amount FLOAT not null,
+		--
+		status varchar(14) not null,
+		--
+		constraint AccountFK foreign key (status) references accountStatus (status),
 		--
         constraint AccountPK Primary key (accountID));
 
