@@ -139,7 +139,12 @@ Insert Into Spiciness(spiciness)
 
 -- this table gives info about menuItem
 Insert Into menuItem(menuType,foodName,spiciness,size,price)
-value('Children’s','Bat Surprise','None','1 serving','20'),
+value('Evening','Bat Surprise','Oh My God','5 serving','50'),
+	('Lunch','Krypoto Beef','Tangy',' 2 servings','15'),
+    ('Evening','BatMobile Nachos','Hot','6 servings','50'),
+    ('Sunday brunch buffet','Egg Foo Young','Mild','4 servings','25'),
+     ('Evening','Bat Chop Suey','Piquant','5 servings','30'),
+	('Children’s','Bat Surprise','None','1 serving','20'),
 	  ('Sunday brunch buffet','Krypoto Beef','Tangy','3 servings','25'),
       ('Lunch','BatMobile Nachos','Hot','4 servings','30'),
       ('Evening','Egg Foo Young','Mild','2 servings','15'),
