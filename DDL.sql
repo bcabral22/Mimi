@@ -372,7 +372,6 @@ create table corpCustomer(
 -- ------------------------------------end Customer stuff-------------------------------------------------------
 
 -- someone else look at this, some of it does not make sense to me. why is there an orderStatus and toGo have an attribute called ready?
--- some of the stuff is not nullable because of circular references
 -- ------------------------------------Order stuff-------------------------------------------------------
 -- this table gives info about the status of an order (IS THIS NEEDED PER THE PROJECT REQUIREMENTS?)
 create table orderStatus(
@@ -469,7 +468,7 @@ create table eatInOrder(
 -- this table gives info about the Party SHOULD BILLID BE A PART OF THE PRIMARY KEY?------------------------------------------------------------------------------------------------
 create table Party(
 		-- primary key
-		billID INT,
+		billID INT not null,
 		-- Customer first name
 		fname varchar(30) not null,
 		-- Customer last name
@@ -506,11 +505,11 @@ create table Bill(
 		-- primary key
 		billID INT not null,
 		-- Customer first name
-		fname varchar(30),
+		fname varchar(30) not null,
 		-- Customer last name
-		lname varchar(30),
+		lname varchar(30) not null,
 		-- Customer address
-		postalAddress varchar(30),
+		postalAddress varchar(30) not null,
 		--
 		constraint BillFK foreign key (fname, lname, postalAddress) references Party (fname, lname, postalAddress),
 		--
@@ -594,7 +593,7 @@ create table Station(
 
 create table Shift(
 		--
-		type varchar(30),
+		type varchar(30) not null,
 		--
 		managerID INT not null,
 		--
@@ -602,7 +601,7 @@ create table Shift(
 		--
 		headChefID INT not null,
 		--
-		date DATE,
+		date DATE not null,
 		--
 		constraint Shift_ManagerFK foreign key (managerID) references Manager (employeeID),
 		--
@@ -617,9 +616,9 @@ create table Shift(
 
 create table Schedule(
 		--
-		type varchar(30),
+		type varchar(30) not null,
 		--
-		date DATE,
+		date DATE not null,
 		--
 		employeeID INT not null,
 		--
