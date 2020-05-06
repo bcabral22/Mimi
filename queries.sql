@@ -64,6 +64,12 @@ group by M.mentorFName) as a
 ;
 
 
+--14
+select *
+from privatecustomer C
+where  EXISTS (select C2.fname, C2.lname, C2.postalAddress from corpcustomer C2 where C2.fname = C.fname and C2.fname = C.fname and C2.postalAddress = C.postalAddress )
+;
+
 -- 15
 select *
 from MenuItem_v M
