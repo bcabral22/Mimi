@@ -222,33 +222,27 @@ Insert Into corpCustomer(fname,lname,postalAddress,orgName,companyName,contactFN
 -- someone else look at this, some of it does not make sense to me. why is there an orderStatus and toGo have an attribute called ready?
 -- ------------------------------------Order stuff-------------------------------------------------------
 -- this table gives info about the status of an order (IS THIS NEEDED PER THE PROJECT REQUIREMENTS?)
-create table orderStatus(
-		-- primary key
-		orderStatus varchar(20) not null,
-		--
-        constraint orderStatusPK Primary key (orderStatus));
+Insert Into orderStatus(orderStatus)
+			value('Ready'),
+            ('Preparing'), 
+            ('Recieved'),
+            ('Ordered');
 
 -- this table gives info about Order
-create table OrderTable(
-		-- primary key
-		orderNumber INT not null,
-		-- status of the order
-		orderStatus varchar(20) not null,
-        --
-        constraint OrderFK foreign key (orderStatus) references orderStatus (orderStatus),
-		--
-        constraint OrderPK Primary key (orderNumber));
+Insert Into OrderTable(orderNumber,orderStatus)
+        value(122,'Ready'),
+			(123,'Preparing'),
+            (124,'Recieved'),
+            (125,'Ordered'),
+            (126,'Preparing'),
+            (127,'Recieved'),
+            (128,'Ordered'),
+            (129,'Ready'),
+            (130,'Preparing');
 
 -- this table gives info about the toGoOrder
-create table toGoOrder(
-		-- primary key
-		orderNumber INT not null,
-		-- status of the order
-		orderStatus varchar(20) not null,
-		-- ready
-		ready varchar(3) not null,
-		-- status of the order
-		phoneNumber varchar(20) not null,
+create table toGoOrder(orderNumber,orderStatus,ready,phoneNumber)
+value(122,'Ready','Yes','147-532-4531');
         --
         constraint toGoOrderFK foreign key (orderNumber) references OrderTable (orderNumber),
 		--
