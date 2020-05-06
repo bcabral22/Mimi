@@ -117,18 +117,20 @@ Insert Into dishType(foodName,dishType)
 				('Krypoto Beef','Chow Mein');
 
 -- this table gives info about Menu
-create table Menu(
-		-- foreign key from the meatDish table
-		menuType varchar(20) not null,
-		--
-        constraint MenuPK Primary key (menuType));
+Insert Into  Menu(menuType)
+		value('Evening'),
+			('Lunch'),
+			('Sunday brunch buffet'),
+			('Children’s');
 
 -- this table gives info about Spiciness
-create table Spiciness(
-		-- primary key
-		spiciness varchar(20) not null,
-		--
-        constraint SpicinessPK Primary key (spiciness));
+-- this table gives info about Spiciness
+Insert Into Spiciness(spiciness)
+		value('Mild'),
+			  ('Tangy'),
+              ('Piquant'),
+              ('Hot'),
+              ('Oh My God');
 
 -- this table gives info about menuItem
 create table menuItem(
