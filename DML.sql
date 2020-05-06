@@ -207,44 +207,16 @@ Insert Into Customer(fname,lname,postalAddress,accountID)
                  ('Martha', 'Wayne','14512 Gotham St',124);
 
 -- this table gives info about the privateCustomer
-create table privateCustomer(
-		-- Customer first name
-		fname varchar(30) not null,
-		-- Customer last name
-		lname varchar(30) not null,
-		-- Customer address
-		postalAddress varchar(30) not null,
-		-- Customer email address
-		email varchar(30) not null,
-		--
-		birthday DATE not null,
-		--
-		constraint privateCustomerFK foreign key (fname, lname, postalAddress) references Customer (fname, lname, postalAddress),
-		--
-        constraint privateCustomerPK Primary key (fname, lname, postalAddress));
+insert into  privateCustomer(fname,lname,postalAddress,email,birthday)
+			value ('Martha', 'Wayne','14512 Gotham St','theWaynes@rich.com',"1985-06-24"),
+					('Mike','Smith','12456 Plush Ave','Markymark@cool.com',"199-01-23");
 
 -- this table gives info about the corpCustomer
-create table corpCustomer(
-		-- Customer first name
-		fname varchar(30) not null,
-		-- Customer last name
-		lname varchar(30) not null,
-		-- Customer address
-		postalAddress varchar(30) not null,
-		-- Org name
-		orgName varchar(30) not null,
-		--
-		companyName varchar(30) not null,
-		--
-		contactFName varchar(30) not null,
-		--
-		contactLName varchar(30) not null,
-		--
-		phoneNumber varchar(30) not null,
-		--
-		constraint corpCustomerFK foreign key (fname, lname, postalAddress) references Customer (fname, lname, postalAddress),
-		--
-        constraint corpCustomerPK Primary key (fname, lname, postalAddress));
+Insert Into corpCustomer(fname,lname,postalAddress,orgName,companyName,contactFName,contactLName,phoneNumber)
+			value ('Dooms','Day','55317 Super St','Sales','Kryptonian Assaualt','Peggy','Yellow','555-462-4639'),
+					('The', 'Joker','23145 Gotham St','Choas','Laughing Company','Harley','Quinn','322-452-4452'),
+                    ('Cat','Women','65214 Burger Ave','Stealing','Diamond Co','Mark','Hamel','321-846-6551');
+	
 -- ------------------------------------end Customer stuff-------------------------------------------------------
 
 -- someone else look at this, some of it does not make sense to me. why is there an orderStatus and toGo have an attribute called ready?
