@@ -1,7 +1,9 @@
+
 -- general employee info table
 
 	Insert into Employee (EmployeeId,fname, lname, yearHired)
-    value(214567,'Travis','Scott','2000-02-02'),
+    value(145879,'Maria','Mark','2003-01-22'),
+		(214567,'Travis','Scott','2000-02-02'),
 		(554123,'Obi', 'Wan','2003-02-05'),
         (215789,'Rick','Grimes','2010-03-05'),
 		(214521,'Paul','Rib','2008-04-20'),
@@ -28,7 +30,8 @@ Insert into healthCare (name, type)
 
 -- this table gives info about fullTime
 Insert into fullTime (EmployeeId,healthCareName, healthCareType, weeklyRate)
-    value(214567,'Super Vision','Eye',1200),
+    value(215789,'Blinding White','Dental',300),
+		(214567,'Super Vision','Eye',1200),
 		(214521,'Bat Shield', 'Medical', 900),
 		(102314,'Grundy Grave','Life', 950),
 		(232323,'Blinding White', 'Dental', 500),
@@ -58,13 +61,15 @@ Insert into sousChef (EmployeeId)
 -- this table gives info about lineCook
 
 Insert into lineCook (EmployeeId)
-    value(232323);
+    value(215789),
+		(232323);
 -- ------------------------------------end full time-------------------------------------------------------
 
 -- -------------------------------part time------------------------------------------------
 -- this table gives info about partTime
 Insert Into partTime(EmployeeID,hourlyRate)
-value(554123,10),
+value(145879,15),
+	(554123,10),
 	(214789,5),
 	(214892,20),
 	(111111,12),
@@ -76,7 +81,8 @@ Insert into Maitred (EmployeeId)
 
 -- this table gives info about waitStaff
 Insert into waitStaff (EmployeeId)
-    value(111111);
+    value(145879),
+		(111111);
 
 -- this table gives info about dishWasher
 Insert into dishWasher (EmployeeId)
@@ -298,18 +304,32 @@ Insert Into eatInOrder(orderNumber,tableNumber,seatNumber,timeArrived)
 			(129,3,1,'13:12:15');
 
 -- ------------------------------------end Order stuff-------------------------------------------------------
+SET FOREIGN_KEY_CHECKS=0;
+-- ------------------------------------Party stuff-------------------------------------------------------
+-- this table gives info about the Party SHOULD BILLID BE A PART OF THE PRIMARY KEY?------------------------------------------------------------------------------------------------
+Insert Into Party(billid,fname,lname,postalAddress,date)
+value     (1,'Mike','Smith','12456 Plush Ave','2020-02-02-02'),
+			(2,'The', 'Joker','23145 Gotham St','2020-01-02'),
+            (3,'Cat','Women','65214 Burger Ave','2020-02-04'),
+            (4,'Mike','Smith','12456 Plush Ave','2020-02-04'),
+			(5,'The', 'Joker','23145 Gotham St','2020-03-10'),
+			(6,'Cat','Women','65214 Burger Ave','2020-04-04');
+Insert Into partyAssignment(tableNumber,fname,lname,postalAddress)
+				value(2,'The', 'Joker','23145 Gotham St'),
+					(3,'Mike','Smith','12456 Plush Ave'),
+                    (1,'Cat','Women','65214 Burger Ave');
 
-
+-- ------------------------------------end Party stuff-------------------------------------------------------
 -- ------------------------------------Bill stuff-------------------------------------------------------
 -- this table gives info about the Bill
-Insert Into Bill(billID)
-	value(1),
-    (2),
-    (3),
-    (4),
-    (5),
-    (6);
-
+Insert Into Bill(billID,fname,lname,postaladdress)
+	value(1,'Mike','Smith','12456 Plush Ave'),
+    (2,'The', 'Joker','23145 Gotham St'),
+    (3,'Cat','Women','65214 Burger Ave'),
+    (4,'Mike','Smith','12456 Plush Ave'),
+    (5,'The', 'Joker','23145 Gotham St'),
+    (6,'Cat','Women','65214 Burger Ave');
+SET FOREIGN_KEY_CHECKS=1;
 -- this table gives info about the cashBill
 Insert Into cashBill(billID)
 		value(1),
@@ -341,23 +361,6 @@ Insert Into Known(billID,fname,lname,postalAddress)
 -- ------------------------------------end Bill stuff-------------------------------------------------------
 
 
--- ------------------------------------Party stuff-------------------------------------------------------
--- this table gives info about the Party SHOULD BILLID BE A PART OF THE PRIMARY KEY?------------------------------------------------------------------------------------------------
-Insert Into Party(billID,fname,lname,postalAddress)
-value     (2,'Mike','Smith','12456 Plush Ave'),
-			(3,'The', 'Joker','23145 Gotham St'),
-            (4,'Cat','Women','65214 Burger Ave');
-            
-Insert Into partyAssignment(tableNumber,fname,lname,postalAddress)
-				value(2,'The', 'Joker','23145 Gotham St'),
-					(3,'Mike','Smith','12456 Plush Ave'),
-                    (1,'Cat','Women','65214 Burger Ave');
-
--- ------------------------------------end Party stuff-------------------------------------------------------
-
-
-
-
 -- ------------------------------------shift stuff-------------------------------------------------------
 Insert Into shiftType(type)
 	value('Morning'),
@@ -372,83 +375,48 @@ value('butcher'),
         ('roast chef'),
         ('sauté chef'),
         ('vegetable chef');
-
+SET FOREIGN_KEY_CHECKS=0;
 Insert Into Shift(type ,managerID,maitredID,headChefID,date)
 value ('Morning',200001,214892,201534,'2020-02-02'),
 		('Evening',214567,554123,000001,'2020-02-02');
 
-		--
-		constraint Shift_ManagerFK foreign key (managerID) references Manager (employeeID),
-		--
-		constraint Shift_MaitredFK foreign key (maitredID) references Maitred (employeeID),
-		--
-		constraint Shift_shiftTypeFK foreign key (type) references shiftType (type),
-		--
-		constraint Shift_headChefFK foreign key (headChefID) references headChef (employeeID),
-
-		--
-        constraint StationPK Primary key (type, date));
-
-create table Schedule(
-		--
-		type varchar(30) not null,
-		--
-		date DATE not null,
-		--
-		employeeID INT not null,
-		--
-		constraint Schedule_EmployeeFK foreign key (employeeID) references Employee (employeeID),
-		--
-		constraint Schedule_ShiftFK foreign key (type, date) references Shift (type, date),
-		--
-        constraint SchedulePK Primary key (type, date, employeeID));
-
-alter table Shift
-		--
-		add constraint Shift_Schedule_ManagerFK foreign key (type, date, managerID) references Schedule (type, date, employeeID), -- --------------------------------------------------
-		--
-		add constraint Shift_Schedule_MaitredFK foreign key (type, date, maitredID) references Schedule (type, date, employeeID),
-		--
-		add constraint Shift_Schedule_headChefFK foreign key (type, date, headChefID) references Schedule (type, date, employeeID);
-
-create table StationAssignment(
-		--
-		type varchar(30) not null,
-		--
-		date DATE not null,
-		--
-		lineCookID INT not null,
-		--
-		stationName varchar(30) not null,
-		--
-		constraint StationAssignment_StationFK foreign key (stationName) references Station (name),
-		--
-		constraint StationAssignment_lineCookFK foreign key (lineCookID) references lineCook (employeeID),
-		--
-		constraint StationAssignment_ScheduleFK foreign key (type, date, lineCookID) references Schedule (type, date, employeeID),
-		--
-        constraint StationAssignmentPK Primary key (type, date, lineCookID, stationName));
+Insert Into Schedule(type,date,employeeID)
+		value ('Morning','2020-02-02',200001 ),
+			('Morning','2020-02-02',214892 ),
+            ('Morning','2020-02-02',201534 ),
+			('Evening','2020-02-02',214567 ),
+            ('Evening','2020-02-02',554123 ),
+            ('Evening','2020-02-02',000001 );
+        SET FOREIGN_KEY_CHECKS=1; 
+        
+Insert Into StationAssignment(type,date, lineCookID,stationName)
+values  ('Morning','2020-02-02',232323,'butcher'),
+		('Morning','2020-02-02',232323,'fry cook'),
+        ('Morning','2020-02-02',232323,'grill chef'),
+		('Morning','2020-02-02',232323,'pantry chef'),
+        ('Morning','2020-02-02',232323,'pastry chef'),
+        ('Morning','2020-02-02',232323,'roast chef'),
+        ('Morning','2020-02-02',232323,'sauté chef'),
+        ('Morning','2020-02-02',232323,'vegetable chef'),
+        ('Evening','2020-02-02',215789,'butcher'),
+		('Evening','2020-02-02',215789,'fry cook'),
+        ('Evening','2020-02-02',215789,'grill chef'),
+		('Evening','2020-02-02',215789,'pantry chef'),
+        ('Evening','2020-02-02',215789,'pastry chef'),
+        ('Evening','2020-02-02',215789,'roast chef'),
+        ('Evening','2020-02-02',215789,'sauté chef'),
+        ('Evening','2020-02-02',215789,'vegetable chef');
+        
 
 
 
-create table waitTableAssignment(
-		--
-		type varchar(30) not null,
-		--
-		date DATE not null,
-		--
-		tableNumber INT not null,
-		--
-		waitStaffID INT not null,
-		--
-		constraint waitTableAssignment_storeTableFK foreign key (tableNumber) references storeTable (tableNumber),
-		--
-		constraint waitTableAssignment_waitStaffFK foreign key (waitStaffID) references waitStaff (employeeID),
-		--
-		constraint waitTableAssignment_ShiftFK foreign key (type, date) references Shift (type, date),
-		--
-		constraint waitTableAssignment_ScheduleFK foreign key (type, date, waitStaffID) references Schedule (type, date, employeeID),
-		--
-        constraint waitTableAssignmentPK Primary key (type, date, tableNumber));
+Insert Into waitTableAssignment(type, date, tableNumber,waitstaffID)
+values('Morning','2020-02-02',1,111111),
+('Morning','2020-02-02',2,111111),
+('Morning','2020-02-02',3,111111),
+('Evening','2020-02-02',1,145879),
+('Evening','2020-02-02',2,145879),
+('Evening','2020-02-02',3,145879);
+
 
 -- ------------------------------------end shift stuff-------------------------------------------------------
