@@ -75,13 +75,17 @@ Insert into dishWasher (EmployeeId)
 -- --------------------------------------food stuff-------------------------------------------------------
 -- this table gives info about Recipes
 Insert into Recipe(EmployeeID,RecipeName)
-value	(201534, 'Krypoto Beef'),
+value	(000001,'Bat Chop Suey'),
+		(408627, 'Egg Foo Young'),
+		(201534, 'Krypoto Beef'),
 		(408627,'BatMobile Nachos'),
 		(000001,'Bat Surprise');
 
 -- this table gives info about foodItem
 Insert Into foodItem(foodName)
-value	('Krypoto Beef'),
+value	('Bat Chop Suey'),
+		('Egg Foo Young'),
+		('Krypoto Beef'),
 		('BatMobile Nachos'),
 		('Bat Surprise');
 
@@ -96,22 +100,21 @@ Insert Into Soup(foodName)
 
 -- this table gives info about meatDish
 Insert Into meatDish(foodName)
-	value	('Krypoto Beef');
+	value	('Bat Chop Suey'),
+			('Egg Foo Young'),
+			('Krypoto Beef');
 
 -- this table gives info about meatType
 Insert Into meatType(foodName,meatType)
-		value	('Krypoto Beef','Beef');
+		value	('Bat Chop Suey','Chef Special'),
+				('Egg Foo Young','Chicken'),
+				('Krypoto Beef','Beef');
 
 -- this table gives info about dishType
-create table dishType(
-		-- foreign key from the meatDish table
-		foodName varchar(20) not null,
-        -- type of dish
-		dishType varchar(20) not null,
-		--
-        constraint dishTypePK Primary key (foodName),
-        -- uniquely identifing this value from the employee table
-		constraint dishTypeFK foreign key (foodName) references meatDish (foodName));
+Insert Into dishType(foodName,dishType)
+		value	('Bat Chop Suey','Chop Suey'),
+				('Egg Foo Young','Egg Foo Young'),
+				('Krypoto Beef','Chow Mein');
 
 -- this table gives info about Menu
 create table Menu(
