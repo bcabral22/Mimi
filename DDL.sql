@@ -462,11 +462,56 @@ create table eatInOrder(
 -- ------------------------------------end Order stuff-------------------------------------------------------
 
 
+
+
+-- ------------------------------------Party stuff-------------------------------------------------------
+-- this table gives info about the Party SHOULD BILLID BE A PART OF THE PRIMARY KEY?------------------------------------------------------------------------------------------------
+create table Party(
+		-- primary key
+		billID INT not null,
+		-- Customer first name
+		fname varchar(30) not null,
+		-- Customer last name
+		lname varchar(30) not null,
+		-- Customer address
+		postalAddress varchar(30) not null,
+		--
+		date DATE not null,
+		--
+		constraint Party_CustomerFK foreign key (fname, lname, postalAddress) references Customer (fname, lname, postalAddress),
+		--
+        constraint PartyPK Primary key (fname, lname, postalAddress, billID));
+
+create table partyAssignment(
+		-- primary key
+		tableNumber INT not null,
+		-- Customer first name
+		fname varchar(30) not null,
+		-- Customer last name
+		lname varchar(30) not null,
+		-- Customer address
+		postalAddress varchar(30) not null,
+		--
+		constraint Party_PartyFK foreign key (fname, lname, postalAddress) references Party (fname, lname, postalAddress),
+		--
+		constraint Party_storeTableFK foreign key (tableNumber) references storeTable (tableNumber),
+		--
+        constraint PartyPK Primary key (fname, lname, postalAddress, tableNumber));
+-- ------------------------------------end Party stuff-------------------------------------------------------
+
 -- ------------------------------------Bill stuff-------------------------------------------------------
 -- this table gives info about the Bill
 create table Bill(
 		-- primary key
 		billID INT not null,
+		-- Customer first name
+		fname varchar(30) not null,
+		-- Customer last name
+		lname varchar(30) not null,
+		-- Customer address
+		postalAddress varchar(30) not null,
+		--
+		constraint BillFK foreign key (fname, lname, postalAddress) references Party (fname, lname, postalAddress),
 		--
         constraint BillPK Primary key (billID));
 
@@ -529,44 +574,9 @@ create table Known(
 
 -- ------------------------------------end Bill stuff-------------------------------------------------------
 
-
--- ------------------------------------Party stuff-------------------------------------------------------
--- this table gives info about the Party SHOULD BILLID BE A PART OF THE PRIMARY KEY?------------------------------------------------------------------------------------------------
-create table Party(
-		-- primary key
-		billID INT not null,
-		-- Customer first name
-		fname varchar(30) not null,
-		-- Customer last name
-		lname varchar(30) not null,
-		-- Customer address
-		postalAddress varchar(30) not null,
-		--
-		constraint Party_CustomerFK foreign key (fname, lname, postalAddress) references Customer (fname, lname, postalAddress),
-		--
-		constraint Party_BillFK foreign key (billID) references Bill (billID),
-		--
-        constraint PartyPK Primary key (fname, lname, postalAddress));
-
-create table partyAssignment(
-		-- primary key
-		tableNumber INT not null,
-		-- Customer first name
-		fname varchar(30) not null,
-		-- Customer last name
-		lname varchar(30) not null,
-		-- Customer address
-		postalAddress varchar(30) not null,
-		--
-		constraint Party_PartyFK foreign key (fname, lname, postalAddress) references Party (fname, lname, postalAddress),
-		--
-		constraint Party_storeTableFK foreign key (tableNumber) references storeTable (tableNumber),
-		--
-        constraint PartyPK Primary key (fname, lname, postalAddress, tableNumber));
--- ------------------------------------end Party stuff-------------------------------------------------------
-
-
-
+alter table Party
+add 		--
+		constraint Party_BillFK foreign key (billID) references Bill (billID);
 
 -- ------------------------------------shift stuff-------------------------------------------------------
 create table shiftType(
