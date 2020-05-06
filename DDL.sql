@@ -249,9 +249,9 @@ create table Mentorship(
 		--
 		foodName varchar(20) not null,
 		--
-		startDate TIME,
+		startDate DATE,
 		--
-		endDate TIME,
+		endDate DATE,
 		--
         constraint MentorshipPK Primary key (sousID, mentorID, foodName),
 		--
