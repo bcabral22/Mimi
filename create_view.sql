@@ -23,6 +23,7 @@ from Mentorship M inner join Employee E
 on M.mentorID = E.employeeID
 inner join  Employee E2
 on m.sousID = E2.employeeID
+order by E.lname, E2.lname
 ;
 
 -- 4
