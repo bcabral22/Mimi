@@ -70,6 +70,15 @@ from privatecustomer C
 where  EXISTS (select C2.fname, C2.lname, C2.postalAddress from corpcustomer C2 where C2.fname = C.fname and C2.fname = C.fname and C2.postalAddress = C.postalAddress )
 ;
 
+-- 13
+select MI.foodname, count(E.employeeID) as total
+from menuitem MI inner join expertise E on
+MI.foodname = E.foodname
+group by MI.foodname
+order by total ASC
+limit 3
+;
+
 -- 15
 select *
 from MenuItem_v M
