@@ -1,9 +1,14 @@
 -- 1
 create view MenuItem_v as
-select MI.foodname, MI.spiciness, MI.price, MI
-from menuItem MI right join Menu M
-on MI.type = M.type
-;
+select MI.foodname, MI.spiciness,
+case
+    when exists(select 'X' from menuItem MI2
+                    where MI.foodname = MI2.foodname
+                    and MI.type = MI2.type) then MI.price
+    else "N/A"
+end,
+MI.price, M.type
+from menuItem MI cross join Menu M;
 
 -- 2
 create Customer_addresses_v as
