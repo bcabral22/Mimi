@@ -1,7 +1,10 @@
 -- general employee info table
 
 	Insert into Employee (EmployeeId,fname, lname, yearHired)
-    value(214521,'Paul','Rib','2008-04-20'),
+    value(214567,'Travis','Scott','2000-02-02'),
+		(554123,'Obi', 'Wan','2003-02-05'),
+        (215789,'Rick','Grimes','2010-03-05'),
+		(214521,'Paul','Rib','2008-04-20'),
 		(102314,'Sam','Adam','2010-09-04'),
 		(201534,'Ricky','Bobby','2016-12-20'),
 		(214789,'Owen','Grimes','2020-05-05'),
@@ -25,7 +28,8 @@ Insert into healthCare (name, type)
 
 -- this table gives info about fullTime
 Insert into fullTime (EmployeeId,healthCareName, healthCareType, weeklyRate)
-    value(214521,'Bat Shield', 'Medical', 900),
+    value(214567,'Super Vision','Eye',1200),
+		(214521,'Bat Shield', 'Medical', 900),
 		(102314,'Grundy Grave','Life', 950),
 		(232323,'Blinding White', 'Dental', 500),
 		(408627,'Grundy Grave', 'Life', 1000),
@@ -36,7 +40,8 @@ Insert into fullTime (EmployeeId,healthCareName, healthCareType, weeklyRate)
     
 -- this table gives info about Manager
 Insert into Manager (EmployeeId)
-    value(200001);
+    value(214567),
+		(200001);
 
 -- this table gives info about headChef
 Insert into headChef (EmployeeId)
@@ -59,13 +64,15 @@ Insert into lineCook (EmployeeId)
 -- -------------------------------part time------------------------------------------------
 -- this table gives info about partTime
 Insert Into partTime(EmployeeID,hourlyRate)
-value(214789,5),
+value(554123,10),
+	(214789,5),
 	(214892,20),
 	(111111,12),
 	(321546,7);
 -- this table gives info about Maitred
 Insert into Maitred (EmployeeId)
-    value(214892);
+    value(554123),
+		(214892);
 
 -- this table gives info about waitStaff
 Insert into waitStaff (EmployeeId)
@@ -356,23 +363,20 @@ Insert Into shiftType(type)
 	value('Morning'),
 		('Evening');
 
-create table Station(
-		--
-		name varchar(30) not null,
-		--
-        constraint StationPK Primary key (name));
+Insert Into Station(name)
+value('butcher'),
+		('fry cook'),
+        ('grill chef'),
+        ('pantry chef'),
+        ('pastry chef'),
+        ('roast chef'),
+        ('sauté chef'),
+        ('vegetable chef');
 
-create table Shift(
-		--
-		type varchar(30) not null,
-		--
-		managerID INT not null,
-		--
-		maitredID INT,
-		--
-		headChefID INT not null,
-		--
-		date DATE not null,
+Insert Into Shift(type,managerID,maitredID,headChefID,date)
+value ('Morning',200001,214892,201534,"2020-02-02"),
+		('Evening',200001,214892,201534,"2020-02-02")
+
 		--
 		constraint Shift_ManagerFK foreign key (managerID) references Manager (employeeID),
 		--
