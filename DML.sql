@@ -53,31 +53,16 @@ value(214892,20),
 	(111111,12),
 	(321546,7);
 -- this table gives info about Maitred
-create table Maitred(
-		-- foreign key from the partTime table
-		employeeID INT not null,
-		--
-        constraint MaitredPK Primary key (employeeID),
-        -- uniquely identifing this value from the employee table
-		constraint MaitredFK foreign key (employeeID) references partTime (employeeID));
+Insert into Maitred (EmployeeId)
+    value(214892);
 
 -- this table gives info about waitStaff
-create table waitStaff(
-		-- foreign key from the partTime table
-		employeeID INT not null,
-		--
-        constraint waitStaffPK Primary key (employeeID),
-        -- uniquely identifing this value from the employee table
-		constraint waitStaffFK foreign key (employeeID) references partTime (employeeID));
+Insert into waitStaff (EmployeeId)
+    value(111111);
 
 -- this table gives info about dishWasher
-create table dishWasher(
-		-- foreign key from the partTime table
-		employeeID INT not null,
-		--
-        constraint dishWasherPK Primary key (employeeID),
-        -- uniquely identifing this value from the employee table
-		constraint dishWasherFK foreign key (employeeID) references partTime (employeeID));
+Insert into waitStaff (EmployeeId)
+    value(321546);
 
 -- --------------------------------------end part time-------------------------------------------------------
 
