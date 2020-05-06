@@ -180,27 +180,23 @@ Insert Into storeTable(tableNumber, status)
               (5,'Available');
 
 -- this table gives info about the Seat
-Insert Into Seat(
-		-- primary key
-		tableNumber INT not null,
-		-- primary key
-		seatNumber INT not null,
-		constraint SeatFK foreign key (tableNumber) references storeTable (tableNumber),
-		--
-        constraint storeTablePK Primary key (tableNumber, seatNumber));
+Insert Into Seat(tableNumber,seatNumber)
+				value (2,2),
+					(3,1),
+                    (1,5);
 
 -- ------------------------------------end Table stuff-------------------------------------------------------
 -- ------------------------------------Customer stuff-------------------------------------------------------
-
+insert Into accountStatus(status)
+		value ('Active'),
+			  ('Inactive');
 -- this table gives info about the Account
-create table Account(
-		--
-		accountID INT not null,
-		--
-		amount FLOAT not null,
-		--
-        constraint AccountPK Primary key (accountID));
-
+Insert Into  Account(status,accountID ,amount)
+		value('Active',555,200.20),
+			 ('Inactive',321,100.21),
+			 ('Active',125,2220.13),
+             ('Active',147,452.11),
+			('Inactive',124,10.21);
 -- this table gives info about the Customer
 create table Customer(
 		-- Customer first name
