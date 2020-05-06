@@ -206,6 +206,7 @@ Insert Into Customer(fname,lname,postalAddress,accountID)
                  ('Cat','Women','65214 Burger Ave',147),
                  ('Martha', 'Wayne','14512 Gotham St',124);
 
+
 -- this table gives info about the privateCustomer
 insert into  privateCustomer(fname,lname,postalAddress,email,birthday)
 			value ('Martha', 'Wayne','14512 Gotham St','theWaynes@rich.com',"1985-06-24"),
@@ -297,61 +298,32 @@ Insert Into Bill(billID)
     (6);
 
 -- this table gives info about the cashBill
-create table cashBill(
-		-- primary key
-		billID INT not null,
-		--
-		constraint cashBillFK foreign key (billID) references Bill (billID),
-		--
-        constraint cashBillPK Primary key (billID));
+Insert Into cashBill(billID)
+		value(1),
+        (6);
 
 -- this table gives info about the mimingsBill
-create table mimingsBill(
-		-- primary key
-		billID INT not null,
-		--
-		mimingsAmount INT not null,
-		--
-		constraint mimingsBillFK foreign key (billID) references Bill (billID),
-		--
-        constraint mimingsBillPK Primary key (billID));
+Insert Into mimingsBill(billID,mimingsAmount)
+	value(3,15),
+		(5,10);
 
 -- this table gives info about the creditBill
-create table creditBill(
-		-- primary key
-		billID INT not null,
-		--
-		constraint creditBillFK foreign key (billID) references Bill (billID),
-		--
-        constraint creditBillPK Primary key (billID));
+Insert Into creditBill(billID)
+value(2),
+     (4);
+
 
 -- this table gives info about the Anon
-create table Anon(
-		-- primary key
-		billID INT not null,
-		--
-		constraint Anon_BillFK foreign key (billID) references Bill (billID),
-		--
-		constraint Anon_cashBillFK foreign key (billID) references cashBill (billID),
-		--
-        constraint AnonPK Primary key (billID));
+Insert Into Anon(billID)
+		value(1),
+        (6);
 
 -- this table gives info about the Known
-create table Known(
-		-- primary key
-		billID INT not null,
-		-- Customer first name
-		fname varchar(30) not null,
-		-- Customer last name
-		lname varchar(30) not null,
-		-- Customer address
-		postalAddress varchar(30) not null,
-		--
-		constraint Known_BillFK foreign key (billID) references Bill (billID),
-		--
-		constraint Known_CustomerFK foreign key (fname, lname, postalAddress) references Customer (fname, lname, postalAddress),
-		--
-        constraint KnownPK Primary key (billID));
+Insert Into Known(billID,fname,lname,postalAddress)
+		value(2,'Mike','Smith','12456 Plush Ave'),
+			(3,'The', 'Joker','23145 Gotham St'),
+            (4,'Cat','Women','65214 Burger Ave'),
+            (5,'The', 'Joker','23145 Gotham St');
 
 -- ------------------------------------end Bill stuff-------------------------------------------------------
 
