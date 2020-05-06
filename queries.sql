@@ -13,6 +13,10 @@ SELECT employeeID, COUNT(*) AS "TOTAL" FROM recipe GROUP BY employeeID
 HAVING COUNT(*) > 3) souschef)
 ORDER BY employeeID ASC;
 
+-- 7
+SELECT customer.fname, customer.lname, account.amount FROM customer
+INNER JOIN account ON customer.accountID = account.accountID
+ORDER BY account.amount DESC;
 
 
 -- 11
