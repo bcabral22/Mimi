@@ -88,25 +88,15 @@ value	('Krypoto Beef'),
 
 -- this table gives info about Appetizer
 Insert Into Appetizer(foodName)
-		values('BatMobile Nachos');
+		value('BatMobile Nachos');
 
 -- this table gives info about Soup
-create table Soup(
-		-- foreign key from the foodItem table
-		foodName varchar(20) not null,
-		--
-        constraint SoupPK Primary key (foodName),
-        -- uniquely identifing this value from the employee table
-		constraint SoupFK foreign key (foodName) references foodItem (foodName));
+Insert Into Soup(foodName) 
+	value ('Bat Surprise');
 
 -- this table gives info about meatDish
-create table meatDish(
-		-- foreign key from the foodItem table
-		foodName varchar(20) not null,
-		--
-        constraint meatDishPK Primary key (foodName),
-        -- uniquely identifing this value from the employee table
-		constraint meatDishFK foreign key (foodName) references foodItem (foodName));
+Insert Into meatDish(foodName)
+	value	('Krypoto Beef');
 
 -- this table gives info about meatType
 create table meatType(
