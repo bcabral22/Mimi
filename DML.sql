@@ -1,7 +1,9 @@
 -- general employee info table
 
 	Insert into Employee (EmployeeId,fname, lname, yearHired)
-    value(321546,'Roby','Rick','2014-12-24'),
+    value(201534,'Ricky','Bobby','2016-12-20'),
+		(214789,'Owen','Grimes','2020-05-05'),
+		(321546,'Roby','Rick','2014-12-24'),
 		(408627,'Brian', 'Cabral', '2017-02-02'),
 		(214892,'Mickey', 'Mouse', '2019-05-12'),
 		(200001,'Bruce', 'Wayne', '1985-11-11'),
@@ -21,12 +23,13 @@ Insert into healthCare (name, type)
 
 -- this table gives info about fullTime
 Insert into fullTime (EmployeeId,healthCareName, healthCareType, weeklyRate)
-    value(232323,'Blinding White', 'Dental', 500),
+    value
+		(232323,'Blinding White', 'Dental', 500),
 		(408627,'Grundy Grave', 'Life', 1000),
 		(200001,'Bat Shield', 'Medical', 3000),
 		(200000,'Super Vision', 'Eye', 600),
-		(000001,'Flash Feet', 'Podiatry', 900);
-	
+		(000001,'Flash Feet', 'Podiatry', 900),
+		(201534,'Super Vision','Eye',1550);
     
 -- this table gives info about Manager
 Insert into Manager (EmployeeId)
@@ -34,7 +37,9 @@ Insert into Manager (EmployeeId)
 
 -- this table gives info about headChef
 Insert into headChef (EmployeeId)
-    value(000001);
+    value(201534),
+    (408627),
+    (000001);
 
 -- this table gives info about sousChef
 Insert into sousChef (EmployeeId)
@@ -49,7 +54,8 @@ Insert into lineCook (EmployeeId)
 -- -------------------------------part time------------------------------------------------
 -- this table gives info about partTime
 Insert Into partTime(EmployeeID,hourlyRate)
-value(214892,20),
+value(214789,5),
+	(214892,20),
 	(111111,12),
 	(321546,7);
 -- this table gives info about Maitred
@@ -61,29 +67,28 @@ Insert into waitStaff (EmployeeId)
     value(111111);
 
 -- this table gives info about dishWasher
-Insert into waitStaff (EmployeeId)
-    value(321546);
+Insert into dishWasher (EmployeeId)
+    value(214789);
 
 -- --------------------------------------end part time-------------------------------------------------------
 
 -- --------------------------------------food stuff-------------------------------------------------------
 -- this table gives info about Recipes
 Insert into Recipe(EmployeeID,RecipeName)
-value(000001,'Bat Surprise');
+value	(201534, 'Krypoto Beef'),
+		(408627,'BatMobile Nachos'),
+		(000001,'Bat Surprise');
 
 -- this table gives info about foodItem
 Insert Into foodItem(foodName)
-value('Bat Surprise');
+value	('Krypoto Beef'),
+		('BatMobile Nachos'),
+		('Bat Surprise');
 
 
 -- this table gives info about Appetizer
-create table Appetizer(
-		-- foreign key from the foodItem table
-		foodName varchar(20) not null,
-		--
-        constraint AppetizerPK Primary key (foodName),
-        -- uniquely identifing this value from the employee table
-		constraint AppetizerFK foreign key (foodName) references foodItem (foodName));
+Insert Into Appetizer(foodName)
+		values('BatMobile Nachos');
 
 -- this table gives info about Soup
 create table Soup(
