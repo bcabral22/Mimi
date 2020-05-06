@@ -130,7 +130,8 @@ Insert Into  Menu(menuType)
 
 -- this table gives info about Spiciness
 Insert Into Spiciness(spiciness)
-		value('Mild'),
+		value('None'),
+			('Mild'),
 			  ('Tangy'),
               ('Piquant'),
               ('Hot'),
@@ -138,7 +139,7 @@ Insert Into Spiciness(spiciness)
 
 -- this table gives info about menuItem
 Insert Into menuItem(menuType,foodName,spiciness,size,price)
-value('Children’s','Bat Surprise','Oh My God','1 serving','20'),
+value('Children’s','Bat Surprise','None','1 serving','20'),
 	  ('Sunday brunch buffet','Krypoto Beef','Tangy','3 servings','25'),
       ('Lunch','BatMobile Nachos','Hot','4 servings','30'),
       ('Evening','Egg Foo Young','Mild','2 servings','15'),
@@ -330,48 +331,25 @@ Insert Into Known(billID,fname,lname,postalAddress)
 
 -- ------------------------------------Party stuff-------------------------------------------------------
 -- this table gives info about the Party SHOULD BILLID BE A PART OF THE PRIMARY KEY?------------------------------------------------------------------------------------------------
-create table Party(
-		-- primary key
-		billID INT not null,
-		-- Customer first name
-		fname varchar(30) not null,
-		-- Customer last name
-		lname varchar(30) not null,
-		-- Customer address
-		postalAddress varchar(30) not null,
-		--
-		constraint Party_CustomerFK foreign key (fname, lname, postalAddress) references Customer (fname, lname, postalAddress),
-		--
-		constraint Party_BillFK foreign key (billID) references Bill (billID),
-		--
-        constraint PartyPK Primary key (fname, lname, postalAddress));
+Insert Into Party(billID,fname,lname,postalAddress)
+value     (2,'Mike','Smith','12456 Plush Ave'),
+			(3,'The', 'Joker','23145 Gotham St'),
+            (4,'Cat','Women','65214 Burger Ave');
+            
+Insert Into partyAssignment(tableNumber,fname,lname,postalAddress)
+				value(2,'The', 'Joker','23145 Gotham St'),
+					(3,'Mike','Smith','12456 Plush Ave'),
+                    (1,'Cat','Women','65214 Burger Ave');
 
-create table partyAssignment(
-		-- primary key
-		tableNumber INT not null,
-		-- Customer first name
-		fname varchar(30) not null,
-		-- Customer last name
-		lname varchar(30) not null,
-		-- Customer address
-		postalAddress varchar(30) not null,
-		--
-		constraint Party_PartyFK foreign key (fname, lname, postalAddress) references Party (fname, lname, postalAddress),
-		--
-		constraint Party_storeTableFK foreign key (tableNumber) references storeTable (tableNumber),
-		--
-        constraint PartyPK Primary key (fname, lname, postalAddress, tableNumber));
 -- ------------------------------------end Party stuff-------------------------------------------------------
 
 
 
 
 -- ------------------------------------shift stuff-------------------------------------------------------
-create table shiftType(
-		--
-		type varchar(30) not null,
-		--
-        constraint shiftTypePK Primary key (type));
+Insert Into shiftType(type)
+	value('Morning'),
+		('Evening');
 
 create table Station(
 		--
