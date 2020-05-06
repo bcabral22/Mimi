@@ -444,8 +444,6 @@ create table Bill(
 		-- primary key
 		billID INT not null,
 		--
-		amountDue FLOAT not null,
-		--
         constraint BillPK Primary key (billID));
 
 -- this table gives info about the cashBill
