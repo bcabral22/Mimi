@@ -373,9 +373,9 @@ value('butcher'),
         ('sauté chef'),
         ('vegetable chef');
 
-Insert Into Shift(type,managerID,maitredID,headChefID,date)
-value ('Morning',200001,214892,201534,"2020-02-02"),
-		('Evening',200001,214892,201534,"2020-02-02")
+Insert Into Shift(type ,managerID,maitredID,headChefID,date)
+value ('Morning',200001,214892,201534,'2020-02-02'),
+		('Evening',214567,554123,000001,'2020-02-02');
 
 		--
 		constraint Shift_ManagerFK foreign key (managerID) references Manager (employeeID),
