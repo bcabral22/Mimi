@@ -6,7 +6,8 @@
 		(200001,'Bruce', 'Wayne', '1985-11-11'),
 		(200000,'Clark', 'Kent', '1999-01-20'),
 		(000001,'Alfred', 'Pennyworth', '1979-10-30'),
-		(111111,'Hal', 'Jordan', '2000-01-01');
+		(111111,'Hal', 'Jordan', '2000-01-01'),
+        (232323,'James', 'Keys', '2006-06-23');
 
 -- ---------------------------------full time-------------------------------------------------
 -- this table gives info about healthCare
@@ -19,7 +20,8 @@ Insert into healthCare (name, type)
 
 -- this table gives info about fullTime
 Insert into fullTime (EmployeeId,healthCareName, healthCareType, weeklyRate)
-    value(408627,'Grundy Grave', 'Life', 1000),
+    value(232323,'Blinding White', 'Dental', 500),
+		(408627,'Grundy Grave', 'Life', 1000),
 		(200001,'Bat Shield', 'Medical', 3000),
 		(200000,'Super Vision', 'Eye', 600),
 		(000001,'Flash Feet', 'Podiatry', 900);
@@ -38,14 +40,9 @@ Insert into sousChef (EmployeeId)
     value(200000);
     
 -- this table gives info about lineCook
-create table lineCook(
-		-- foreign key from the fullTime table
-		employeeID INT not null,
-		--
-        constraint lineCookPK Primary key (employeeID),
-        -- uniquely identifing this value from the employee table
-		constraint lineCookFK foreign key (employeeID) references fullTime (employeeID));
 
+Insert into lineCook (EmployeeId)
+    value(232323);
 -- ------------------------------------end full time-------------------------------------------------------
 
 -- -------------------------------part time------------------------------------------------
