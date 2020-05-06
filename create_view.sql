@@ -82,3 +82,6 @@ where P.date > DATE_SUB(NOW(),INTERVAL 1 YEAR)
 group by C.fname, C.lname, C.postalAddress
 order by total DESC
 ;
+
+-- business rule
+CREATE VIEW email_list AS SELECT email FROM privateCustomer WHERE privateCustomer.status <> 'Inactive'
