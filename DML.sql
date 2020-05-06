@@ -252,21 +252,19 @@ value(124,'Recieved','Yes','148-123-4117'),
 
 -- this table gives info about the webOrder
 Insert Into webOrder(orderNumber)
-value(123),
-	(129);
-        --
-        constraint webOrderFK foreign key (orderNumber) references toGoOrder (orderNumber),
-		--
-        constraint webOrderPK Primary key (orderNumber));
-
+value(124),
+	(130),
+	(126),
+	(128)	;
+ 
 -- this table gives info about the phoneOrder
-create table phoneOrder(
-		-- primary key
-		orderNumber INT not null,
-        --
-        constraint phoneOrderFK foreign key (orderNumber) references toGoOrder (orderNumber),
-		--
-        constraint phoneOrderPK Primary key (orderNumber));
+Insert Into phoneOrder(orderNumber)
+	value(125),
+		(122),
+        (127),
+        (128);
+        
+    
 
 -- this table gives info about the orderDetails
 create table orderDetails(
