@@ -291,7 +291,7 @@ create table Seat(
 		seatNumber INT not null,
 		constraint SeatFK foreign key (tableNumber) references storeTable (tableNumber),
 		--
-        constraint storeTablePK Primary key (tableNumber, seatNumber));
+        constraint SeatPK Primary key (tableNumber, seatNumber));
 
 -- ------------------------------------end Table stuff-------------------------------------------------------
 -- ------------------------------------Customer stuff-------------------------------------------------------
