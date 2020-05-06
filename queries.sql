@@ -47,6 +47,8 @@ OD.foodname = MI.foodname and
 OD.menutype = MI.menutype
 where P.date > DATE_SUB(NOW(),INTERVAL 1 YEAR)
 group by OD.foodname
+order by total DESC
+limit 5
 ;
 
 -- 12
