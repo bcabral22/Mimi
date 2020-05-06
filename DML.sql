@@ -223,6 +223,8 @@ create table privateCustomer(
 		-- Customer email address
 		email varchar(30) not null,
 		--
+		birthday DATE not null,
+		--
 		constraint privateCustomerFK foreign key (fname, lname, postalAddress) references Customer (fname, lname, postalAddress),
 		--
         constraint privateCustomerPK Primary key (fname, lname, postalAddress));
@@ -348,8 +350,6 @@ create table Bill(
 		-- primary key
 		billID INT not null,
 		--
-		amountDue FLOAT not null,
-		--
         constraint BillPK Primary key (billID));
 
 -- this table gives info about the cashBill
@@ -469,7 +469,7 @@ create table Shift(
 		--
 		managerID INT not null,
 		--
-		maitredID INT not null,
+		maitredID INT,
 		--
 		headChefID INT not null,
 		--
@@ -482,58 +482,55 @@ create table Shift(
 		constraint Shift_shiftTypeFK foreign key (type) references shiftType (type),
 		--
 		constraint Shift_headChefFK foreign key (headChefID) references headChef (employeeID),
+
 		--
-        constraint StationPK Primary key (type, date, managerID, headChefID));
+        constraint StationPK Primary key (type, date));
 
 create table Schedule(
 		--
 		type varchar(30) not null,
 		--
-		managerID INT not null,
-		--
-		headChefID INT not null,
-		--
 		date DATE not null,
 		--
-		constraint Schedule_ManagerFK foreign key (managerID) references Employee (employeeID),
+		employeeID INT not null,
 		--
-		constraint Schedule_headChefFK foreign key (headChefID) references Employee (employeeID),
+		constraint Schedule_EmployeeFK foreign key (employeeID) references Employee (employeeID),
 		--
-		constraint Schedule_ShiftFK foreign key (type, date, managerID, headChefID) references Shift (type, date, managerID, headChefID),
+		constraint Schedule_ShiftFK foreign key (type, date) references Shift (type, date),
 		--
-        constraint SchedulePK Primary key (type, managerID, headChefID, date));
+        constraint SchedulePK Primary key (type, date, employeeID));
+
+alter table Shift
+		--
+		add constraint Shift_Schedule_ManagerFK foreign key (type, date, managerID) references Schedule (type, date, employeeID), -- --------------------------------------------------
+		--
+		add constraint Shift_Schedule_MaitredFK foreign key (type, date, maitredID) references Schedule (type, date, employeeID),
+		--
+		add constraint Shift_Schedule_headChefFK foreign key (type, date, headChefID) references Schedule (type, date, employeeID);
 
 create table StationAssignment(
 		--
-		stationName varchar(30) not null,
-		--
 		type varchar(30) not null,
 		--
-		managerID INT not null,
-		--
-		headChefID INT not null,
+		date DATE not null,
 		--
 		lineCookID INT not null,
 		--
-		date DATE not null,
+		stationName varchar(30) not null,
 		--
 		constraint StationAssignment_StationFK foreign key (stationName) references Station (name),
 		--
 		constraint StationAssignment_lineCookFK foreign key (lineCookID) references lineCook (employeeID),
 		--
-		constraint StationAssignment_ScheduleFK foreign key (type, date, managerID, headChefID) references Shift (type, date, managerID, headChefID),
+		constraint StationAssignment_ScheduleFK foreign key (type, date, lineCookID) references Schedule (type, date, employeeID),
 		--
-        constraint StationAssignmentPK Primary key (type, managerID, headChefID, date, lineCookID, stationName));
+        constraint StationAssignmentPK Primary key (type, date, lineCookID, stationName));
 
 
 
 create table waitTableAssignment(
 		--
 		type varchar(30) not null,
-		--
-		managerID INT not null,
-		--
-		headChefID INT not null,
 		--
 		date DATE not null,
 		--
@@ -545,11 +542,10 @@ create table waitTableAssignment(
 		--
 		constraint waitTableAssignment_waitStaffFK foreign key (waitStaffID) references waitStaff (employeeID),
 		--
-		constraint waitTableAssignment_ShiftFK foreign key (type, date, managerID, headChefID) references Schedule (type, date, managerID, headChefID),
+		constraint waitTableAssignment_ShiftFK foreign key (type, date) references Shift (type, date),
 		--
-		constraint waitTableAssignment_ScheduleFK foreign key (type, date, managerID, headChefID) references Shift (type, date, managerID, headChefID),
+		constraint waitTableAssignment_ScheduleFK foreign key (type, date, waitStaffID) references Schedule (type, date, employeeID),
 		--
-        constraint waitTableAssignmentPK Primary key (type, managerID, headChefID, date, tableNumber, waitStaffID));
+        constraint waitTableAssignmentPK Primary key (type, date, tableNumber));
 
 -- ------------------------------------end shift stuff-------------------------------------------------------
-
