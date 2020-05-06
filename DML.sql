@@ -72,13 +72,9 @@ Insert into Recipe(EmployeeID,RecipeName)
 value(000001,'Bat Surprise');
 
 -- this table gives info about foodItem
-create table foodItem(
-        -- primary key
-		foodName varchar(20) not null,
-		--
-        constraint foodItemPK Primary key (foodName),
-        -- uniquely identifing this value from the employee table
-		constraint foodItemFK foreign key (foodName) references Recipe (recipeName));
+Insert Into foodItem(foodName)
+value('Bat Surprise');
+
 
 -- this table gives info about Appetizer
 create table Appetizer(
