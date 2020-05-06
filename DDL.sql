@@ -319,6 +319,8 @@ create table privateCustomer(
 		-- Customer email address
 		email varchar(30) not null,
 		--
+		birthday DATE not null,
+		--
 		constraint privateCustomerFK foreign key (fname, lname, postalAddress) references Customer (fname, lname, postalAddress),
 		--
         constraint privateCustomerPK Primary key (fname, lname, postalAddress));
