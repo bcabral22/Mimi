@@ -68,15 +68,8 @@ Insert into waitStaff (EmployeeId)
 
 -- --------------------------------------food stuff-------------------------------------------------------
 -- this table gives info about Recipes
-create table Recipe(
-		-- foreign key from the headChef table
-		employeeID INT not null,
-        -- primary key
-		recipeName varchar(20) not null,
-		--
-        constraint RecipePK Primary key (recipeName),
-        -- uniquely identifing this value from the employee table
-		constraint RecipeFK foreign key (employeeID) references headChef (employeeID));
+Insert into Recipe(EmployeeID,RecipeName)
+value(000001,'Bat Surprise');
 
 -- this table gives info about foodItem
 create table foodItem(
