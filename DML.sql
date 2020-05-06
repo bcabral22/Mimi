@@ -265,52 +265,36 @@ Insert Into phoneOrder(orderNumber)
         (128);
         
     
-
+ 
 -- this table gives info about the orderDetails
-create table orderDetails(
-		--
-		orderNumber INT not null,
-		--
-        menuType varchar(20) not null,
-		--
-		foodName varchar(20) not null,
-		-- IS THIS NEEDED? -----------------------------------------------------------------------------------------------------------------------------------------------------
-		amount INT not null,
-        --
-        constraint orderDetails_OrderFK foreign key (orderNumber) references OrderTable (orderNumber),
-        --
-        constraint orderDetails_menuItemFK foreign key (menuType) references menuItem (menuType),
-        --
-        constraint orderDetails_menuItemFK2 foreign key (foodName) references menuItem (foodName),
-		--
-        constraint phoneOrderPK Primary key (orderNumber, menuType, foodName));
-
-
+Insert Into  orderDetails(orderNumber,menuType,foodName,amount )
+	value(122,'Children’s','Bat Surprise',30),
+		(123,'Sunday brunch buffet','Krypoto Beef',25),
+		(124,'Lunch','BatMobile Nachos',30),
+        (125,'Evening','Egg Foo Young',15),
+        (126,'Lunch','Bat Chop Suey',22),
+        (127,'Children’s','Bat Surprise',20),
+        (128,'Sunday brunch buffet','Krypoto Beef',25),
+        (129,'Lunch','BatMobile Nachos',30),
+        (130,'Lunch','Bat Chop Suey',22);
+    
 -- this table gives info about the eatInOrder
-create table eatInOrder(
-		-- primary key
-		orderNumber INT not null,
-		--
-		tableNumber INT not null,
-		--
-		seatNumber INT not null,
-		--
-		timeArrived TIME,
-        --
-        constraint eatInOrderFK foreign key (tableNumber, seatNumber) references Seat (tableNumber, seatNumber),
-		--
-        constraint eatInOrderPK Primary key (orderNumber));
+Insert Into eatInOrder(orderNumber,tableNumber,seatNumber,timeArrived) 
+        value(123,2,2,'19:15:15'),
+			(129,3,1,'13:12:15');
 
 -- ------------------------------------end Order stuff-------------------------------------------------------
 
 
 -- ------------------------------------Bill stuff-------------------------------------------------------
 -- this table gives info about the Bill
-create table Bill(
-		-- primary key
-		billID INT not null,
-		--
-        constraint BillPK Primary key (billID));
+Insert Into Bill(billID)
+	value(1),
+    (2),
+    (3),
+    (4),
+    (5),
+    (6);
 
 -- this table gives info about the cashBill
 create table cashBill(
