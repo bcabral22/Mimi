@@ -124,7 +124,6 @@ Insert Into  Menu(menuType)
 			('Children’s');
 
 -- this table gives info about Spiciness
--- this table gives info about Spiciness
 Insert Into Spiciness(spiciness)
 		value('Mild'),
 			  ('Tangy'),
@@ -133,25 +132,12 @@ Insert Into Spiciness(spiciness)
               ('Oh My God');
 
 -- this table gives info about menuItem
-create table menuItem(
-		-- foreign key from the Menu table
-		menuType varchar(20) not null,
-        -- foreign key from the foodItem table
-		foodName varchar(20) not null,
-        -- foreign key from the Spiciness table
-		spiciness varchar(20) not null,
-        --
-        size varchar(20) not null,
-        --
-        price varchar(20) not null,
-		--
-        constraint menuItemPK Primary key (menuType, foodName),
-        --
-        constraint menuItem_MenuFK foreign key (menuType) references Menu (menuType),
-        --
-        constraint menuItem_FoodItemFK foreign key (foodName) references foodItem (foodName),
-        --
-        constraint menuItem_SpicinessFK foreign key (spiciness) references Spiciness (spiciness));
+Insert Into menuItem(menuType,foodName,spiciness,size,price)
+value('Children’s','Bat Surprise','Oh My God','1 serving','20'),
+	  ('Sunday brunch buffet','Krypoto Beef','Tangy','3 servings','25'),
+      ('Lunch','BatMobile Nachos','Hot','4 servings','30'),
+      ('Evening','Egg Foo Young','Mild','2 servings','15'),
+      ('Lunch','Bat Chop Suey','Piquant','3 servings','22');
 
 -- ------------------------------------end food stuff-------------------------------------------------------
 
