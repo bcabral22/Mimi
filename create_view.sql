@@ -33,17 +33,52 @@ order by E.lname, E2.lname
 
 -- 4
 create Customer_Sales_v as
-select C.fname from
+select C.fname, C.lname, C.postalAddress, sum(MI.price * OD.amount) as total from
 customer C inner join party P on
 C.fname = P.fname and C.lname = P.lname and C.postalAddress = P.postalAddress
-inner join partyassignmnet PA on
+inner join partyassignment PA on
 C.fname = PA.fname and C.lname = PA.lname and C.postalAddress = PA.postalAddress
 inner join storetable ST on
-
-
+PA.tableNumber = ST.tableNumber
+inner join seat S on
+st.tableNumber = S.tableNumber
+inner join eatInorder EI on
+S.tableNumber = EI.tableNumber and
+S.seatNumber = EI.seatNumber
+inner join ordertable O on
+EI.orderNumber = O.orderNumber
+inner join
+orderdetails OD on
+O.orderNumber = OD.orderNumber
+inner join menuitem MI on
+OD.foodname = MI.foodname and
+OD.menutype = MI.menutype
+group by C.fname, C.lname, C.postalAddress, P.date
 ;
 
 -- 5
 create Customer_Value_v as
-
+select C.fname, C.lname, C.postalAddress, sum(MI.price * OD.amount) as total from
+customer C inner join party P on
+C.fname = P.fname and C.lname = P.lname and C.postalAddress = P.postalAddress
+inner join partyassignment PA on
+C.fname = PA.fname and C.lname = PA.lname and C.postalAddress = PA.postalAddress
+inner join storetable ST on
+PA.tableNumber = ST.tableNumber
+inner join seat S on
+st.tableNumber = S.tableNumber
+inner join eatInorder EI on
+S.tableNumber = EI.tableNumber and
+S.seatNumber = EI.seatNumber
+inner join ordertable O on
+EI.orderNumber = O.orderNumber
+inner join
+orderdetails OD on
+O.orderNumber = OD.orderNumber
+inner join menuitem MI on
+OD.foodname = MI.foodname and
+OD.menutype = MI.menutype
+where P.date > DATE_SUB(NOW(),INTERVAL 1 YEAR)
+group by C.fname, C.lname, C.postalAddress
+order by total DESC
 ;
