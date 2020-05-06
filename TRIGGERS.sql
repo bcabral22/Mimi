@@ -24,3 +24,17 @@ BEGIN
 	END IF;
 END;
 DELIMITER;
+
+-- Business rule #5
+DELIMITER //
+CREATE TRIGGER max_order_triggers BEFORE INSERT ON ordertable
+FOR EACH ROW
+BEGIN
+	declare MSG varchar(60);
+	IF ((select count(*) from ordertable where storetable.orderStatus = 'IN PROGRESS') > 50)
+	THEN
+		SET MSG = 'Too Many Orders In Progress';
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = MSG;
+	END IF;
+END;
+DELIMITER;
