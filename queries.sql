@@ -18,6 +18,12 @@ SELECT customer.fname, customer.lname, account.amount FROM customer
 INNER JOIN account ON customer.accountID = account.accountID
 ORDER BY account.amount DESC;
 
+-- 8
+SELECT known.fname, known.lname, SUM(mimingsbill.mimingsAmount) FROM known 
+INNER JOIN mimingsbill ON known.billID = mimingsbill.billID
+GROUP BY known.fname, known.lname
+ORDER BY SUM(mimingsbill.mimingsAmount) DESC
+
 
 -- 11
 select OD.foodname, sum(MI.price)
