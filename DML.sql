@@ -157,25 +157,13 @@ Insert Into Expertise(employeeID,foodName)
 		('102314', 'Bat Chop Suey');
 
 -- this table gives info about Mentorship
-create table Mentorship(
-		--
-		sousID INT not null,
-		--
-		mentorID INT not null,
-		--
-		foodName varchar(20) not null,
-		--
-		startDate TIME,
-		--
-		endDate TIME,
-		--
-        constraint MentorshipPK Primary key (sousID, mentorID, foodName),
-		--
-		constraint Mentorship_sousChefFK foreign key (sousID) references sousChef (employeeID),
-        --
-		constraint Mentorship_ExpertiseFK foreign key (foodName, mentorID) references Expertise (foodName, employeeID));
+Insert Into Mentorship(sousID,mentorID,foodName,startDate,endDate)
+value (102314,200000,'Bat Surprise',"2019-08-15","2019-10-16"),
+	(200000,102314,'Krypoto Beef',"2018-08-15","2018-10-16"),
+    (214521,200000,'Egg Foo Young',"2017-08-15","2017-10-16"),
+    (200000,102314,'Bat Chop Suey',"2016-08-15","2016-10-16"),
+    (102314,214521,'BatMobile Nachos',"2015-08-15","2015-10-16");
 -- ------------------------------------end expertise and mentorship stuff-------------------------------------------------------
-
 
 -- ------------------------------------Table stuff-------------------------------------------------------
 -- this table gives info about the Table
