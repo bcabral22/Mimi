@@ -11,6 +11,20 @@ BEGIN
 END;
 DELIMITER;
 
+-- Business rule #3
+DELIMITER //
+CREATE TRIGGER max_food_triggers BEFORE INSERT ON menuItem
+FOR EACH ROW
+BEGIN
+	declare MSG varchar(60);
+	IF ((select count(*) from menuItem where menuItem.menuType = new.menuType) > 1)
+	THEN
+		SET MSG = 'Too Many Orders In Progress';
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = MSG;
+	END IF;
+END;
+DELIMITER;
+
 -- Business rule #4
 DELIMITER //
 CREATE TRIGGER table_status BEFORE INSERT ON partyassignment
