@@ -1,6 +1,6 @@
 -- Business rule #1
 DELIMITER //
-CREATE TRIGGER known_BEFORE_INSERT BEFORE INSERT ON known
+CREATE TRIGGER bday_email_trigger BEFORE INSERT ON known
 FOR EACH ROW
 BEGIN
 	IF Month(new.bday) = 5
@@ -27,7 +27,7 @@ DELIMITER;
 
 -- Business rule #4
 DELIMITER //
-CREATE TRIGGER table_status BEFORE INSERT ON partyassignment
+CREATE TRIGGER table_status_trigger BEFORE INSERT ON partyassignment
 FOR EACH ROW
 BEGIN
 	declare MSG varchar(40);
