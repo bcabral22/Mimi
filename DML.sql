@@ -197,20 +197,14 @@ Insert Into  Account(status,accountID ,amount)
 			 ('Active',125,2220.13),
              ('Active',147,452.11),
 			('Inactive',124,10.21);
+
 -- this table gives info about the Customer
-create table Customer(
-		-- Customer first name
-		fname varchar(30) not null,
-		-- Customer last name
-		lname varchar(30) not null,
-		-- Customer address
-		postalAddress varchar(30) not null,
-		--
-		accountID INT not null,
-		--
-		constraint CustomerFK foreign key (accountID) references Account (accountID),
-		--
-        constraint CustomerPK Primary key (fname, lname, postalAddress));
+Insert Into Customer(fname,lname,postalAddress,accountID)
+	         value ('Mike','Smith','12456 Plush Ave',555),
+		         ('Dooms','Day','55317 Super St',321),
+                 ('The', 'Joker','23145 Gotham St',125),
+                 ('Cat','Women','65214 Burger Ave',147),
+                 ('Martha', 'Wayne','14512 Gotham St',124);
 
 -- this table gives info about the privateCustomer
 create table privateCustomer(
