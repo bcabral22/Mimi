@@ -372,6 +372,7 @@ create table corpCustomer(
 -- ------------------------------------end Customer stuff-------------------------------------------------------
 
 -- someone else look at this, some of it does not make sense to me. why is there an orderStatus and toGo have an attribute called ready?
+-- some of the stuff is not nullable because of circular references
 -- ------------------------------------Order stuff-------------------------------------------------------
 -- this table gives info about the status of an order (IS THIS NEEDED PER THE PROJECT REQUIREMENTS?)
 create table orderStatus(
@@ -432,7 +433,7 @@ create table orderDetails(
         menuType varchar(20) not null,
 		--
 		foodName varchar(20) not null,
-		-- IS THIS NEEDED? -----------------------------------------------------------------------------------------------------------------------------------------------------
+		-- ammount of foodName ordered
 		amount INT not null,
         --
         constraint orderDetails_OrderFK foreign key (orderNumber) references OrderTable (orderNumber),
@@ -468,7 +469,7 @@ create table eatInOrder(
 -- this table gives info about the Party SHOULD BILLID BE A PART OF THE PRIMARY KEY?------------------------------------------------------------------------------------------------
 create table Party(
 		-- primary key
-		billID INT not null,
+		billID INT,
 		-- Customer first name
 		fname varchar(30) not null,
 		-- Customer last name
@@ -505,11 +506,11 @@ create table Bill(
 		-- primary key
 		billID INT not null,
 		-- Customer first name
-		fname varchar(30) not null,
+		fname varchar(30),
 		-- Customer last name
-		lname varchar(30) not null,
+		lname varchar(30),
 		-- Customer address
-		postalAddress varchar(30) not null,
+		postalAddress varchar(30),
 		--
 		constraint BillFK foreign key (fname, lname, postalAddress) references Party (fname, lname, postalAddress),
 		--
@@ -580,7 +581,7 @@ add 		--
 
 -- ------------------------------------shift stuff-------------------------------------------------------
 create table shiftType(
-		--
+		-- the type of shift, day or night
 		type varchar(30) not null,
 		--
         constraint shiftTypePK Primary key (type));
@@ -593,7 +594,7 @@ create table Station(
 
 create table Shift(
 		--
-		type varchar(30) not null,
+		type varchar(30),
 		--
 		managerID INT not null,
 		--
@@ -601,7 +602,7 @@ create table Shift(
 		--
 		headChefID INT not null,
 		--
-		date DATE not null,
+		date DATE,
 		--
 		constraint Shift_ManagerFK foreign key (managerID) references Manager (employeeID),
 		--
@@ -616,9 +617,9 @@ create table Shift(
 
 create table Schedule(
 		--
-		type varchar(30) not null,
+		type varchar(30),
 		--
-		date DATE not null,
+		date DATE,
 		--
 		employeeID INT not null,
 		--
