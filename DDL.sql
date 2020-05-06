@@ -677,3 +677,13 @@ create table waitTableAssignment(
         constraint waitTableAssignmentPK Primary key (type, date, tableNumber));
 
 -- ------------------------------------end shift stuff-------------------------------------------------------
+
+-- ------------------------------------Start Newsletter Stuff-------------------------------------------------------
+create table bdayNewsletter(
+		--
+		fname varchar(30) not null,
+		--
+		lname varchar(30) not null,
+		--
+		bdayEmail date not null);
+-- ------------------------------------End Newsletter Stuff-------------------------------------------------------	

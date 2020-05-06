@@ -5,7 +5,7 @@ FOR EACH ROW
 BEGIN
 	IF Month(new.bday) = 5
 	THEN 
-		insert into emails (fname, lname, bdayEmail) values
+		insert into bdayNewsletter (fname, lname, bdayEmail) values
         (new.fname, new.lname, new.bday);
 	END IF;
 END;
