@@ -206,6 +206,7 @@ Insert Into Customer(fname,lname,postalAddress,accountID)
                  ('Cat','Women','65214 Burger Ave',147),
                  ('Martha', 'Wayne','14512 Gotham St',124);
 
+
 -- this table gives info about the privateCustomer
 insert into  privateCustomer(fname,lname,postalAddress,email,birthday)
 			value ('Martha', 'Wayne','14512 Gotham St','theWaynes@rich.com',"1985-06-24"),
@@ -265,109 +266,64 @@ Insert Into phoneOrder(orderNumber)
         (128);
         
     
-
+ 
 -- this table gives info about the orderDetails
-create table orderDetails(
-		--
-		orderNumber INT not null,
-		--
-        menuType varchar(20) not null,
-		--
-		foodName varchar(20) not null,
-		-- IS THIS NEEDED? -----------------------------------------------------------------------------------------------------------------------------------------------------
-		amount INT not null,
-        --
-        constraint orderDetails_OrderFK foreign key (orderNumber) references OrderTable (orderNumber),
-        --
-        constraint orderDetails_menuItemFK foreign key (menuType) references menuItem (menuType),
-        --
-        constraint orderDetails_menuItemFK2 foreign key (foodName) references menuItem (foodName),
-		--
-        constraint phoneOrderPK Primary key (orderNumber, menuType, foodName));
-
-
+Insert Into  orderDetails(orderNumber,menuType,foodName,amount )
+	value(122,'Children’s','Bat Surprise',30),
+		(123,'Sunday brunch buffet','Krypoto Beef',25),
+		(124,'Lunch','BatMobile Nachos',30),
+        (125,'Evening','Egg Foo Young',15),
+        (126,'Lunch','Bat Chop Suey',22),
+        (127,'Children’s','Bat Surprise',20),
+        (128,'Sunday brunch buffet','Krypoto Beef',25),
+        (129,'Lunch','BatMobile Nachos',30),
+        (130,'Lunch','Bat Chop Suey',22);
+    
 -- this table gives info about the eatInOrder
-create table eatInOrder(
-		-- primary key
-		orderNumber INT not null,
-		--
-		tableNumber INT not null,
-		--
-		seatNumber INT not null,
-		--
-		timeArrived TIME,
-        --
-        constraint eatInOrderFK foreign key (tableNumber, seatNumber) references Seat (tableNumber, seatNumber),
-		--
-        constraint eatInOrderPK Primary key (orderNumber));
+Insert Into eatInOrder(orderNumber,tableNumber,seatNumber,timeArrived) 
+        value(123,2,2,'19:15:15'),
+			(129,3,1,'13:12:15');
 
 -- ------------------------------------end Order stuff-------------------------------------------------------
 
 
 -- ------------------------------------Bill stuff-------------------------------------------------------
 -- this table gives info about the Bill
-create table Bill(
-		-- primary key
-		billID INT not null,
-		--
-        constraint BillPK Primary key (billID));
+Insert Into Bill(billID)
+	value(1),
+    (2),
+    (3),
+    (4),
+    (5),
+    (6);
 
 -- this table gives info about the cashBill
-create table cashBill(
-		-- primary key
-		billID INT not null,
-		--
-		constraint cashBillFK foreign key (billID) references Bill (billID),
-		--
-        constraint cashBillPK Primary key (billID));
+Insert Into cashBill(billID)
+		value(1),
+        (6);
 
 -- this table gives info about the mimingsBill
-create table mimingsBill(
-		-- primary key
-		billID INT not null,
-		--
-		mimingsAmount INT not null,
-		--
-		constraint mimingsBillFK foreign key (billID) references Bill (billID),
-		--
-        constraint mimingsBillPK Primary key (billID));
+Insert Into mimingsBill(billID,mimingsAmount)
+	value(3,15),
+		(5,10);
 
 -- this table gives info about the creditBill
-create table creditBill(
-		-- primary key
-		billID INT not null,
-		--
-		constraint creditBillFK foreign key (billID) references Bill (billID),
-		--
-        constraint creditBillPK Primary key (billID));
+Insert Into creditBill(billID)
+value(2),
+     (4);
+
 
 -- this table gives info about the Anon
-create table Anon(
-		-- primary key
-		billID INT not null,
-		--
-		constraint Anon_BillFK foreign key (billID) references Bill (billID),
-		--
-		constraint Anon_cashBillFK foreign key (billID) references cashBill (billID),
-		--
-        constraint AnonPK Primary key (billID));
+Insert Into Anon(billID)
+		value(1),
+        (6);
 
 -- this table gives info about the Known
-create table Known(
-		-- primary key
-		billID INT not null,
-		-- Customer first name
-		fname varchar(30) not null,
-		-- Customer last name
-		lname varchar(30) not null,
-		-- Customer address
-		postalAddress varchar(30) not null,
-		--
-		constraint Known_BillFK foreign key (billID) references Bill (billID),
-		--
-		constraint Known_CustomerFK foreign key (fname, lname, postalAddress) references Customer (fname, lname, postalAddress),
-		--
-        constraint KnownPK Primary key (billID));
+Insert Into Known(billID,fname,lname,postalAddress)
+		value(2,'Mike','Smith','12456 Plush Ave'),
+			(3,'The', 'Joker','23145 Gotham St'),
+            (4,'Cat','Women','65214 Burger Ave'),
+            (5,'The', 'Joker','23145 Gotham St');
 
 -- ------------------------------------end Bill stuff-------------------------------------------------------
 
