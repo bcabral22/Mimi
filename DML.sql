@@ -1,7 +1,8 @@
 -- general employee info table
 
 	Insert into Employee (EmployeeId,fname, lname, yearHired)
-    value(408627,'Brian', 'Cabral', '2017-02-02'),
+    value(321546,'Roby','Rick','2014-12-24'),
+		(408627,'Brian', 'Cabral', '2017-02-02'),
 		(214892,'Mickey', 'Mouse', '2019-05-12'),
 		(200001,'Bruce', 'Wayne', '1985-11-11'),
 		(200000,'Clark', 'Kent', '1999-01-20'),
@@ -47,16 +48,10 @@ Insert into lineCook (EmployeeId)
 
 -- -------------------------------part time------------------------------------------------
 -- this table gives info about partTime
-create table partTime(
-		-- foreign key from the employee table
-		employeeID INT not null,
-        -- the set amount of money the person makes an hour
-        hourlyRate INT ,
-		--
-        constraint partTimePK Primary key (employeeID),
-        -- uniquely identifing this value from the employee table
-		constraint partTimeFK foreign key (employeeID) references Employee (employeeID));
-
+Insert Into partTime(EmployeeID,hourlyRate)
+value(214892,20),
+	(111111,12),
+	(321546,7);
 -- this table gives info about Maitred
 create table Maitred(
 		-- foreign key from the partTime table
