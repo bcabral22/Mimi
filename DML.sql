@@ -169,8 +169,7 @@ value (102314,200000,'Bat Surprise',"2019-08-15","2019-10-16"),
 Insert Into tableStatus(status)
 value('Available'),
 	('Unavailable');
-		--
-        constraint tableStatusPK Primary key (status));
+    
 -- this table gives info about the Table
 -- might need to rename this
 Insert Into storeTable(tableNumber, status)		
