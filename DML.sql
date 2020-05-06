@@ -176,7 +176,7 @@ Insert Into storeTable(tableNumber)
               (5);
 
 -- this table gives info about the Seat
-create table Seat(
+Insert Into Seat(
 		-- primary key
 		tableNumber INT not null,
 		-- primary key
