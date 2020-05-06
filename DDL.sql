@@ -587,7 +587,7 @@ create table Shift(
 		--
 		managerID INT not null,
 		--
-		maitredID INT not null,
+		maitredID INT,
 		--
 		headChefID INT not null,
 		--
