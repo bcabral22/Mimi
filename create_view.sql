@@ -33,6 +33,13 @@ order by E.lname, E2.lname
 
 -- 4
 create Customer_Sales_v as
+select C.fname from
+customer C inner join party P on
+C.fname = P.fname and C.lname = P.lname and C.postalAddress = P.postalAddress
+inner join partyassignmnet PA on
+C.fname = PA.fname and C.lname = PA.lname and C.postalAddress = PA.postalAddress
+inner join storetable ST on
+
 
 ;
 
