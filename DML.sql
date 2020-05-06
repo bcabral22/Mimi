@@ -168,9 +168,12 @@ value (102314,200000,'Bat Surprise',"2019-08-15","2019-10-16"),
 -- ------------------------------------Table stuff-------------------------------------------------------
 -- this table gives info about the Table
 -- might need to rename this
-create table storeTable(
-		-- primary key
-		tableNumber INT not null,
+Insert Into storeTable(tableNumber)		
+		value (1),
+			  (2),
+              (3),
+              (4),
+              (5);
 		--
         constraint storeTablePK Primary key (tableNumber));
 
