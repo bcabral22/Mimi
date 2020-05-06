@@ -1,16 +1,17 @@
 -- 1
 create view MenuItem_v as
-select foodname, spiciness, price
-from menuItem
+select MI.foodname, MI.spiciness, MI.price, MI
+from menuItem MI right join Menu M
+on MI.type = M.type
 ;
 
 -- 2
 create Customer_addresses_v as
-select *, "Private Customer"
+select *, "Private Customer" as Type
 from privateCustomer PC inner join customer C on
 PC.fname = C.fname, PC.lname = C.lname, PC.postalAddress = C.postalAddress
 union
-select *, "Corporate Customer"
+select *, "Corporate Customer" as Type
 from corporateCustomer CC inner join customer C on
 CC.fname = C.fname, CC.lname = C.lname, CC.postalAddress = C.postalAddress
 ;
