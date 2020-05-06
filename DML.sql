@@ -1,7 +1,9 @@
 -- general employee info table
 
 	Insert into Employee (EmployeeId,fname, lname, yearHired)
-    value(201534,'Ricky','Bobby','2016-12-20'),
+    value(214521,'Paul','Rib','2008-04-20'),
+		(102314,'Sam','Adam','2010-09-04'),
+		(201534,'Ricky','Bobby','2016-12-20'),
 		(214789,'Owen','Grimes','2020-05-05'),
 		(321546,'Roby','Rick','2014-12-24'),
 		(408627,'Brian', 'Cabral', '2017-02-02'),
@@ -23,7 +25,8 @@ Insert into healthCare (name, type)
 
 -- this table gives info about fullTime
 Insert into fullTime (EmployeeId,healthCareName, healthCareType, weeklyRate)
-    value
+    value(214521,'Bat Shield', 'Medical', 900),
+		(102314,'Grundy Grave','Life', 950),
 		(232323,'Blinding White', 'Dental', 500),
 		(408627,'Grundy Grave', 'Life', 1000),
 		(200001,'Bat Shield', 'Medical', 3000),
@@ -43,7 +46,9 @@ Insert into headChef (EmployeeId)
 
 -- this table gives info about sousChef
 Insert into sousChef (EmployeeId)
-    value(200000);
+    value(214521),
+		(102314),
+		(200000);
     
 -- this table gives info about lineCook
 
@@ -144,17 +149,10 @@ value('Children’s','Bat Surprise','Oh My God','1 serving','20'),
 -- ------------------------------------expertise and mentorship stuff-------------------------------------------------------
 
 -- this table gives info about Expertise
-create table Expertise(
-		--
-		employeeID INT not null,
-		--
-		foodName varchar(20) not null,
-		--
-        constraint ExpertisePK Primary key (employeeID, foodName),
-		--
-		constraint Expertise_sousChefFK foreign key (employeeID) references sousChef (employeeID),
-        --
-		constraint Expertise_foodItemFK foreign key (foodName) references foodItem (foodName));
+Insert Into Expertise(employeeID,foodName)
+	value('200000','Bat Surprise'),
+		
+		;
 
 -- this table gives info about Mentorship
 create table Mentorship(
