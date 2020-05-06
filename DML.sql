@@ -166,14 +166,19 @@ value (102314,200000,'Bat Surprise',"2019-08-15","2019-10-16"),
 -- ------------------------------------end expertise and mentorship stuff-------------------------------------------------------
 
 -- ------------------------------------Table stuff-------------------------------------------------------
+Insert Into tableStatus(status)
+value('Available'),
+	('Unavailable');
+		--
+        constraint tableStatusPK Primary key (status));
 -- this table gives info about the Table
 -- might need to rename this
-Insert Into storeTable(tableNumber)		
-		value (1),
-			  (2),
-              (3),
-              (4),
-              (5);
+Insert Into storeTable(tableNumber, status)		
+		value (1, 'Available'),
+			  (2,'Unavailable'),
+              (3,'Unavailable'),
+              (4,'Available'),
+              (5,'Available');
 
 -- this table gives info about the Seat
 Insert Into Seat(
