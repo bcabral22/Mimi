@@ -241,17 +241,19 @@ Insert Into OrderTable(orderNumber,orderStatus)
             (130,'Preparing');
 
 -- this table gives info about the toGoOrder
-create table toGoOrder(orderNumber,orderStatus,ready,phoneNumber)
-value(122,'Ready','Yes','147-532-4531');
-        --
-        constraint toGoOrderFK foreign key (orderNumber) references OrderTable (orderNumber),
-		--
-        constraint toGoOrderPK Primary key (orderNumber));
+Insert Into toGoOrder(orderNumber,orderStatus,ready,phoneNumber)
+value(124,'Recieved','Yes','148-123-4117'),
+	(125,'Ordered','No','145-541-9632'),
+    (126,'Preparing','No','123-854-4223'),
+    (127,'Recieved','Yes','235-453-7853'),
+    (128,'Ordered','No','125-754-8623'),
+	(122,'Ready','Yes','147-532-4531'),
+	 (130,'Preparing','No','142-540-4581');
 
 -- this table gives info about the webOrder
-create table webOrder(
-		-- primary key
-		orderNumber INT not null,
+Insert Into webOrder(orderNumber)
+value(123),
+	(129);
         --
         constraint webOrderFK foreign key (orderNumber) references toGoOrder (orderNumber),
 		--
