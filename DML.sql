@@ -151,8 +151,10 @@ value('Children’s','Bat Surprise','Oh My God','1 serving','20'),
 -- this table gives info about Expertise
 Insert Into Expertise(employeeID,foodName)
 	value('200000','Bat Surprise'),
-		
-		;
+		('102314', 'Krypoto Beef'),
+		(214521,'BatMobile Nachos'),
+        ('200000','Egg Foo Young'),
+		('102314', 'Bat Chop Suey');
 
 -- this table gives info about Mentorship
 create table Mentorship(
